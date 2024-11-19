@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import LoginModal from '@/components/Login/LoginModal';
+import LoginModal from '@/components/auth/LoginModal';
 import { HeaderProps } from '@/types';
 import Link from 'next/link';
 
