@@ -1,3 +1,5 @@
+// api/auth/signin/email
+
 import { generateToken } from "@/app/utils/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "../../../../../../lib/mongodb";

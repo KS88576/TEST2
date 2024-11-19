@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { FiChevronDown, FiWind, FiDollarSign, FiAlertCircle } from "react-icons/fi";
+import { FaFire } from 'react-icons/fa6';
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 interface Token {
@@ -95,7 +96,7 @@ const BurnComponent: React.FC = () => {
             <div className="flex justify-center -my-2">
               <div className="bg-[#2C393F] p-2 rounded-lg border border-[#00BCD4]/30">
                 <div className="bg-[#37474F] p-2 rounded-lg">
-                  <FiWind className="w-5 h-5 text-[#00BCD4] animate-pulse" />
+                  <FaFire className="w-5 h-5 text-[#00BCD4] animate-pulse" />
                 </div>
               </div>
             </div>
@@ -145,7 +146,7 @@ const BurnComponent: React.FC = () => {
                 hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]
                 flex items-center justify-center space-x-2"
             >
-              <FiWind className="w-5 h-5" />
+              <FaFire className="w-5 h-5" />
               <span>Burn and Redeem</span>
             </button>
 

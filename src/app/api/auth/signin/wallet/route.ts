@@ -1,3 +1,5 @@
+// api/auth/signin/wallet
+
 import { PublicKey } from '@solana/web3.js';
 import { verify } from '@noble/ed25519';
 import bs58 from 'bs58';

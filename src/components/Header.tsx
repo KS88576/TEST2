@@ -1,27 +1,45 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { FiSettings, FiChevronDown, FiActivity, FiWind, FiBell, FiDollarSign, FiBriefcase, FiMinimize, FiAward, FiAnchor, FiStar, FiArrowUpRight, FiTwitter, FiYoutube, FiMessageCircle, FiBookOpen, FiHome } from "react-icons/fi";
+import { FiSettings, FiChevronDown, FiActivity, FiMenu, FiBell, FiDollarSign, FiBriefcase, FiMinimize, FiX, FiAnchor, FiArrowUpRight, FiYoutube, FiBookOpen, FiHome } from "react-icons/fi";
 import { 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import LoginModal from '@/components/auth/LoginModal';
+import LoginModal from '@/components/auth/login/LoginModal';
 import { HeaderProps } from '@/types';
 import Link from 'next/link';
+import { FaXTwitter, FaDiscord, FaFire } from 'react-icons/fa6';
+import UserDropdown from '../components/auth/UserDropdown/index';
 
 const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onLogoClick }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Get user from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+  };
 
   const tabs = [
     { id: 'launch', label: 'Launch', icon: <FiActivity className="w-4 h-4" /> },
     { id: 'mint', label: 'Mint', icon: <FiDollarSign className="w-4 h-4" /> },
-    { id: 'burn', label: 'Burn', icon: <FiWind className="w-4 h-4" /> },
+    { id: 'burn', label: 'Burn', icon: <FaFire className="w-4 h-4" /> },
     { id: 'manage', label: 'Manage', icon: <FiArrowUpRight className="w-4 h-4" /> },
   ];
   const dropdownItems = [
@@ -69,11 +87,11 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onLogoClick }) 
                 <div className="flex items-center justify-around">
                   <Link href="https://twitter.com" 
                     className="p-2 hover:bg-white/10 rounded-lg transition-all group">
-                    <FiTwitter className="w-5 h-5 text-gray-400 group-hover:text-[#1DA1F2]" />
+                    <FaXTwitter className="w-5 h-5 text-gray-400 group-hover:text-[#1DA1F2]" />
                   </Link>
                   <Link href="https://discord.com" 
                     className="p-2 hover:bg-white/10 rounded-lg transition-all group">
-                    <FiMessageCircle className="w-5 h-5 text-gray-400 group-hover:text-[#5865F2]" />
+                    <FaDiscord className="w-5 h-5 text-gray-400 group-hover:text-[#5865F2]" />
                   </Link>
                   <Link href="https://youtube.com" 
                     className="p-2 hover:bg-white/10 rounded-lg transition-all group">
@@ -108,21 +126,70 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onLogoClick }) 
           ))}
         </nav>
 
-        {/* Right Section */}
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <button className="p-2 text-white bg-white/10 rounded-full hover:bg-white/20 transition-colors">
-            <FiSettings className="w-5 h-5" />
-          </button>
-          <button 
-          onClick={() => setShowLoginModal(true)}
-          className="px-3 sm:px-4 py-2 bg-[#00BCD4] text-white text-sm sm:text-base rounded-lg 
-            hover:bg-[#00BCD4]/80 transition-colors shadow-[0_0_20px_rgba(0,188,212,0.3)] 
-            hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]"
-        >
-          Login
-        </button>
-        </div>
+          {/* Auth Section */}
+          <div className="flex items-center space-x-4">
+            <button className="p-2 text-white bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+              <FiSettings className="w-5 h-5" />
+            </button>
+            {user ? (
+              <UserDropdown
+                user={user}
+                onLogout={handleLogout}
+              />
+            ) : (
+              <button
+                onClick={() => setShowLoginModal(true)}
+                className="px-4 py-2 bg-[#00BCD4] text-white rounded-lg 
+                  hover:bg-[#00BCD4]/80 transition-colors shadow-[0_0_20px_rgba(0,188,212,0.3)] 
+                  hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]"
+              >
+                Login
+              </button>
+            )}
+          </div>
       </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+          <div className="sm:hidden absolute left-0 right-0 top-full mt-2 
+            bg-[#37474F] border border-[#00BCD4]/30 rounded-lg shadow-lg p-4 space-y-4">
+            <nav className="grid gap-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    onTabChange(tab.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`
+                    flex items-center space-x-2 px-4 py-3 rounded-lg transition-all
+                    ${isHomePage && activeTab === tab.id 
+                      ? 'bg-[#00BCD4]/20 text-[#00BCD4]' 
+                      : 'text-white hover:bg-white/10'}
+                  `}
+                >
+                  {tab.icon}
+                  <span>{tab.label}</span>
+                </button>
+              ))}
+            </nav>
+
+            <div className="border-t border-[#00BCD4]/30 pt-4">
+              {dropdownItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center space-x-2 px-4 py-3 text-white 
+                    hover:bg-white/10 rounded-lg"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
     </header>
       <LoginModal 
           isOpen={showLoginModal}
