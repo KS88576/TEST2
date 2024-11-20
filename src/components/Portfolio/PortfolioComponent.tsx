@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { AuthRequired } from '@/components/auth/AuthRequired';
 import UserHeader from './UserHeader';
 import StatsGrid from './StatsGrid';
 import PortfolioChart from './PortfolioChart';
@@ -17,7 +19,8 @@ interface FavoriteToken {
 }
 
 const PortfolioComponent: React.FC = () => {
-  const [username, setUsername] = useState<string>("CryptoWhale.sol");
+  const { isAuthenticated } = useAuth();
+  const [username, setUsername] = useState<string>("CryptoWhale.rs");
   const [favoriteTokens] = useState<FavoriteToken[]>([
     { 
       symbol: 'EUR+', 
@@ -57,6 +60,12 @@ const PortfolioComponent: React.FC = () => {
     // Implement remove favorite logic here
     console.log('Removing favorite:', symbol);
   };
+
+  if (!isAuthenticated) {
+    return (
+      <AuthRequired message="Please login to view your portfolio and manage your holdings." />
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">

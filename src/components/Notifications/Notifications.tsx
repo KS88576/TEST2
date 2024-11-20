@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { AuthRequired } from '@/components/auth/AuthRequired';
 import { FiBell, FiSettings, FiFilter } from 'react-icons/fi';
 import NotificationCard from './NotificationCard';
 import TokenSubscriptionCard from './TokenSubscriptionCard';
@@ -8,6 +10,7 @@ import NotificationFilters from './NotificationFilters';
 import { TokenNotification, NotificationType, SubscribedToken, NotificationPreference } from './types';
 
 const Notifications: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const [selectedTypes, setSelectedTypes] = useState<NotificationType[]>([]);
   const [showUnread, setShowUnread] = useState(false);
   const [notifications, setNotifications] = useState<TokenNotification[]>([
@@ -78,6 +81,12 @@ const Notifications: React.FC = () => {
     if (selectedTypes.length > 0 && !selectedTypes.includes(notification.type)) return false;
     return true;
   });
+
+  if (!isAuthenticated) {
+    return (
+      <AuthRequired message="Please login to view your notifications and manage your subscriptions." />
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
