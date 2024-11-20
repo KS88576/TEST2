@@ -84,11 +84,7 @@ const PortfolioComponent: React.FC = () => {
       </div>
 
       {/* User Profile Header */}
-      <UserHeader 
-        username={username}
-        onUsernameChange={handleUsernameChange}
-        joinDate="Sep 2023"
-      />
+      <UserHeader />
 
       {/* Stats Overview */}
       <StatsGrid />
