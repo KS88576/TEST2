@@ -23,18 +23,18 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
   };
 
   return (
-    <DialogContent className="bg-[#37474F] border-[#00BCD4] text-white sm:max-w-md md:max-w-lg lg:max-w-xl">
-      <DialogHeader className="pt-6 px-6">
-        <DialogTitle className="text-2xl font-bold text-center">Launch New Stablecoin</DialogTitle>
+    <DialogContent className="bg-[#37474F] border-[#00BCD4] text-white sm:max-w-[95%] md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto">
+      <DialogHeader className="pt-4 px-4">
+        <DialogTitle className="text-xl font-bold text-center">Launch New Stablecoin</DialogTitle>
       </DialogHeader>
       
-      <div className="px-6 pb-6">
-        <p className="text-gray-300 text-sm text-center mb-6">
+      <div className="px-4 pb-4">
+        <p className="text-gray-300 text-sm text-center mb-4">
           Enter the details for your new stablecoin token
         </p>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1">
             <label className="text-sm font-medium text-gray-300">Token Name</label>
             <input
               type="text"
@@ -42,13 +42,13 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g., USD Plus"
-              className="w-full p-3 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
+              className="w-full p-2.5 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
               focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white placeholder-gray-400
               transition-all duration-200"
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-sm font-medium text-gray-300">Token Symbol</label>
             <input
               type="text"
@@ -56,13 +56,13 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
               value={formData.symbol}
               onChange={handleChange}
               placeholder="e.g., USD+"
-              className="w-full p-3 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
+              className="w-full p-2.5 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
               focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white placeholder-gray-400
               transition-all duration-200"
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="text-sm font-medium text-gray-300">Target Fiat Currency</label>
             <input
               type="text"
@@ -70,7 +70,7 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
               value={formData.currency}
               onChange={handleChange}
               placeholder="e.g., USD"
-              className="w-full p-3 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
+              className="w-full p-2.5 rounded-lg bg-[#37474F]/50 border border-[#00BCD4]/30 
               focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white placeholder-gray-400
               transition-all duration-200"
             />
@@ -78,7 +78,7 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
 
           <button 
             type="submit"
-            className="w-full p-3 mt-6 bg-[#00BCD4] rounded-lg hover:bg-[#00BCD4]/80 
+            className="w-full p-2.5 mt-4 bg-[#00BCD4] rounded-lg hover:bg-[#00BCD4]/80 
             transition-all duration-300 font-medium
             shadow-[0_0_20px_rgba(0,188,212,0.3)] hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]"
           >

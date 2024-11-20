@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react';
 import { FiSearch, FiArrowRight, FiArrowLeft, FiPlus } from 'react-icons/fi';
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogPortal } from "@/components/ui/dialog";
 import { Token } from '@/types';
 import NewsFeed from '../NewsFeed';
 import LaunchModal from './LaunchModal';
 import TokenCard from './TokenCard';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface LaunchTabProps {
   tokens: Token[];
@@ -16,29 +17,46 @@ interface LaunchTabProps {
 const LaunchTab: React.FC<LaunchTabProps> = ({ tokens = [], onSelectToken }) => {
   const [page, setPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const { requireAuth } = useAuth();
 
   const filteredTokens = tokens?.filter(token => 
     token?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     token?.symbol?.toLowerCase().includes(searchQuery.toLowerCase())
   ) ?? [];
 
+  const handleLaunchClick = () => {
+    requireAuth(() => {
+      // This code will only run if the user is authenticated
+      document.querySelector<HTMLButtonElement>('[data-dialog-trigger="launch"]')?.click();
+    });
+  };
+
   return (
     <div className="space-y-8">
       {/* Top Controls */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-        <Dialog>
+      <Dialog>
           <DialogTrigger asChild>
-            <button className="w-full sm:w-auto px-6 py-3 bg-[#00BCD4] text-white rounded-lg 
-              hover:bg-[#00BCD4]/80 transition-colors 
-              shadow-[0_0_20px_rgba(0,188,212,0.3)] hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]
-              flex items-center justify-center space-x-2"
-            >
-              <FiPlus className="w-5 h-5" />
-              <span>Launch Stablecoin</span>
-            </button>
+            <button 
+              data-dialog-trigger="launch"
+              className="hidden"
+            />
           </DialogTrigger>
-          <LaunchModal />
+          <DialogPortal>
+            <LaunchModal />
+          </DialogPortal>
         </Dialog>
+
+        <button
+          onClick={handleLaunchClick}
+          className="w-full sm:w-auto px-6 py-3 bg-[#00BCD4] text-white rounded-lg 
+            hover:bg-[#00BCD4]/80 transition-colors 
+            shadow-[0_0_20px_rgba(0,188,212,0.3)] hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]
+            flex items-center justify-center space-x-2"
+        >
+          <FiPlus className="w-5 h-5" />
+          <span>Launch Stablecoin</span>
+        </button>
 
         <div className="relative w-full sm:w-auto sm:min-w-[320px] lg:min-w-[400px]">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />

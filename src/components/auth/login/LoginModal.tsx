@@ -5,6 +5,7 @@ import EmailLogin from './EmailLogin';
 import WalletLogin from './WalletLogin';
 import SignupModal from '../signup/SignupModal';
 import { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
   const { toast } = useToast();
   const [openSignup, setOpenSignup] = useState(false);
+  const { login } = useAuth();
 
   const handleEmailLogin = async (email: string) => {
     try {
@@ -34,6 +36,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       localStorage.setItem('user', JSON.stringify(data.user));
       
       toast.success('Login successful');
+      // After successful login:
+      login(); // This will close the modal and execute any pending action
       onClose();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to login');

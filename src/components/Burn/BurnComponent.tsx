@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { FiChevronDown, FiWind, FiDollarSign, FiAlertCircle } from "react-icons/fi";
 import { FaFire } from 'react-icons/fa6';
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
+import { useAuth } from '@/contexts/AuthContext';
 
 interface Token {
   name: string;
@@ -15,6 +16,7 @@ interface Token {
 const BurnComponent: React.FC = () => {
   const [amount, setAmount] = useState<string>('');
   const [receiveAmount, setReceiveAmount] = useState<string>('');
+  const { requireAuth } = useAuth();
   const [selectedStablecoin, setSelectedStablecoin] = useState<Token>({
     name: "USD Stablecoin",
     symbol: "USD+",
@@ -32,6 +34,14 @@ const BurnComponent: React.FC = () => {
       // Calculate receive amount (1:1 for this example)
       setReceiveAmount(value);
     }
+  };
+
+  const handleBurn = () => {
+    requireAuth(() => {
+      // This code will only execute if the user is authenticated
+      console.log('Burning stablecoin...');
+      // Add your minting logic here
+    });
   };
 
   return (
@@ -141,6 +151,7 @@ const BurnComponent: React.FC = () => {
 
             {/* Burn Button */}
             <button 
+              onClick={handleBurn}
               className="w-full py-3 sm:py-4 bg-[#00BCD4] text-white rounded-xl font-medium 
                 hover:bg-[#00BCD4]/80 transition-colors shadow-[0_0_20px_rgba(0,188,212,0.3)] 
                 hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]

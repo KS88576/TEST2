@@ -7,9 +7,11 @@ interface DialogTriggerProps extends React.ComponentPropsWithoutRef<typeof Dialo
 interface DialogContentProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {}
 interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {}
+interface DialogPortalProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Portal> {}
 
 const Dialog = DialogPrimitive.Root
 const DialogTrigger = DialogPrimitive.Trigger
+const DialogPortal = DialogPrimitive.Portal
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -54,9 +56,11 @@ export {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogPortal,
   type DialogProps,
   type DialogTriggerProps,
   type DialogContentProps,
   type DialogHeaderProps,
   type DialogTitleProps,
+  type DialogPortalProps,
 }
