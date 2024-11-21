@@ -11,6 +11,7 @@ export interface ApeToken {
     price: string;
     priceChange24h: number;
     logoUrl?: string;
+    decimals?: number;
   }
   
   export interface TokenRowProps {
@@ -30,4 +31,12 @@ export interface ApeToken {
     totalItems: number;
     itemsPerPage: number;
     onPageChange: (page: number) => void;
+  }
+
+  export interface Token {
+    name: string;
+    symbol: string;
+    logo?: string;
+    decimals?: number;
+    price?: string;
   }

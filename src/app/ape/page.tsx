@@ -2,6 +2,7 @@
 
 import AppLayout from '@/components/layouts/AppLayout';
 import ApeOrSell from "@/components/ApeOrSell/ApeOrSell";
+import QuickStats from "@/components/ApeOrSell/QuickStats";
 import { FiActivity, FiAlertCircle } from 'react-icons/fi';
 
 export default function ApePage() {
@@ -42,36 +43,7 @@ export default function ApePage() {
         </div>
   
         {/* Quick Stats Bar */}
-        <div className="bg-[#2C393F]">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex flex-wrap justify-center md:justify-between gap-4 text-sm">
-              <div className="flex items-center space-x-8">
-                <div>
-                  <span className="text-gray-400">BTC/USD:</span>
-                  <span className="text-green-400 ml-2">$50,234.21 (+2.4%)</span>
-                </div>
-                <div>
-                  <span className="text-gray-400">ETH/USD:</span>
-                  <span className="text-green-400 ml-2">$2,891.15 (+3.1%)</span>
-                </div>
-                <div>
-                  <span className="text-gray-400">SOL/USD:</span>
-                  <span className="text-green-400 ml-2">$98.45 (+5.2%)</span>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div>
-                  <span className="text-gray-400">Gas:</span>
-                  <span className="text-white ml-2">25 Gwei</span>
-                </div>
-                <div>
-                  <span className="text-gray-400">24h Volume:</span>
-                  <span className="text-[#00BCD4] ml-2">$24.5M</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <QuickStats />
   
         {/* Main Content */}
         <main>

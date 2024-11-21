@@ -40,9 +40,7 @@ const StatsGrid: React.FC = () => {
       try {
         const response = await fetch('/api/user/profile');
         if (!response.ok) throw new Error('Failed to fetch stats');
-        
         const data: ProfileStats = await response.json();
-        
         setStats([
           { 
             label: 'Total Value Locked', 
@@ -84,7 +82,6 @@ const StatsGrid: React.FC = () => {
         setIsLoading(false);
       }
     };
-
     fetchStats();
   }, []);
 

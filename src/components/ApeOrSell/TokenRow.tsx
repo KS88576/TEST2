@@ -1,10 +1,12 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiClock } from 'react-icons/fi';
-import { TokenRowProps } from './types';
+import { TokenRowProps, Token } from './types';
+import TradingModal from './TradingModal';
 
-const TokenRow: React.FC<TokenRowProps> = ({ token, onBuy, onSell }) => {
+
+const TokenRow: React.FC<TokenRowProps> = ({ token }) => {
   const getTimeAgo = (launchTime: Date) => {
     const seconds = Math.floor((new Date().getTime() - launchTime.getTime()) / 1000);
     
@@ -12,6 +14,22 @@ const TokenRow: React.FC<TokenRowProps> = ({ token, onBuy, onSell }) => {
     if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
     if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
     return `${Math.floor(seconds / 86400)}d ago`;
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<'buy' | 'sell'>('buy');
+
+  const handleOpenModal = (type: 'buy' | 'sell') => {
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
+  const tradingToken: Token = {
+    name: token.name,
+    symbol: token.symbol,
+    logo: token.logoUrl,
+    decimals: token.decimals || 6, // default decimals if undefined
+    price: token.price
   };
 
   return (
@@ -68,25 +86,34 @@ const TokenRow: React.FC<TokenRowProps> = ({ token, onBuy, onSell }) => {
         <span className="text-[#00BCD4] font-medium">{token.apy}</span>
       </td>
       <td className="px-6 py-4">
-        <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button
-            onClick={() => onBuy(token)}
-            className="px-3 py-1.5 bg-green-500/20 text-green-400 rounded-lg 
-              hover:bg-green-500/30 transition-colors text-sm"
+        <div className="flex space-x-2">
+        <button
+            onClick={() => handleOpenModal('buy')}
+            className="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg 
+              hover:bg-green-500/30 transition-colors text-sm font-medium"
           >
             Buy
           </button>
           <button
-            onClick={() => onSell(token)}
-            className="px-3 py-1.5 bg-red-500/20 text-red-400 rounded-lg 
-              hover:bg-red-500/30 transition-colors text-sm"
+            onClick={() => handleOpenModal('sell')}
+            className="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg 
+              hover:bg-red-500/30 transition-colors text-sm font-medium"
           >
             Sell
           </button>
         </div>
+      {/* Trading Modal */}
+      <TradingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialTab={modalType}
+        token={tradingToken}
+      />
       </td>
     </tr>
   );
 };
+
+// opacity -  opacity-0 group-hover:opacity-100 transition-opacity
 
 export default TokenRow;
