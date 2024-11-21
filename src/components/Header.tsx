@@ -46,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onLogoClick }) 
     { label: 'Home', icon: <FiHome className="w-4 h-4" />, href: '/home' },
     { label: 'Portfolio', icon: <FiBriefcase className="w-4 h-4" />, href: '/portfolio' },
     { label: 'Anchor Ranks', icon: <FiAnchor className="w-4 h-4" />, href: '/ranks' },
-    { label: 'Ape', icon: <FiMinimize className="w-4 h-4" />, href: '/ape' },
+    { label: 'Arena', icon: <FiMinimize className="w-4 h-4" />, href: '/arena' },
     { label: 'Notifications', icon: <FiBell className="w-4 h-4" />, href: '/notifications' },
     { label: 'Buy Stablebond', icon: <FiDollarSign className="w-4 h-4" />, href: 'https://app.etherfuse.com' },
   ];

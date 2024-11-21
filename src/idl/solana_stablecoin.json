@@ -1,0 +1,3764 @@
+{
+  "address": "7gFZNhBQidDAqbzqbuFFzetrnordQLLpibV8hX5S2taU",
+  "metadata": {
+    "name": "solana_stablecoin",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_supported_bond",
+      "discriminator": [
+        115,
+        247,
+        7,
+        200,
+        84,
+        34,
+        95,
+        123
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bond_mint"
+        },
+        {
+          "name": "bond_info"
+        },
+        {
+          "name": "payment_feed_info"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "min_creation_amount",
+          "type": "u64"
+        },
+        {
+          "name": "min_redemption_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "burn_tokens",
+      "discriminator": [
+        76,
+        15,
+        51,
+        254,
+        229,
+        215,
+        121,
+        66
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "stablecoin_state",
+          "writable": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_state.mint",
+                "account": "StablecoinState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_bond_account",
+          "docs": [
+            "User's stablebond token account to receive bonds"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_stablecoin_account",
+          "docs": [
+            "User's stablecoin token account to burn from",
+            "User's stablecoin token account"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "user_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "stablecoin_mint",
+          "docs": [
+            "The stablecoin mint"
+          ],
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "docs": [
+            "Collateral vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "sol_fee_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  111,
+                  108,
+                  95,
+                  102,
+                  101,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "kyc_info"
+        },
+        {
+          "name": "oracle"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "stablecoin_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "create_stablecoin",
+      "discriminator": [
+        100,
+        62,
+        131,
+        196,
+        204,
+        102,
+        67,
+        185
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "docs": [
+            "Factory state PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stablecoin_state",
+          "docs": [
+            "Stablecoin state PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  98,
+                  108,
+                  101,
+                  99,
+                  111,
+                  105,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "symbol"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint",
+          "docs": [
+            "The mint for the stablecoin"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "yield_mint",
+          "docs": [
+            "Yield mint"
+          ],
+          "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        },
+        {
+          "name": "collateral_vault",
+          "docs": [
+            "Collateral vault for stablebonds"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "stablecoin_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bond_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "bond_mint",
+          "docs": [
+            "The stablebond mint we're using as collateral"
+          ]
+        },
+        {
+          "name": "bond_info"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "target_currency",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "distribute_yield",
+      "discriminator": [
+        233,
+        92,
+        186,
+        157,
+        235,
+        238,
+        212,
+        114
+      ],
+      "accounts": [
+        {
+          "name": "distributor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stablecoin_state",
+          "writable": true
+        },
+        {
+          "name": "user_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_state.user",
+                "account": "UserState"
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_state.mint",
+                "account": "StablecoinState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "oracle",
+          "docs": [
+            "Bond oracle for price feed"
+          ]
+        },
+        {
+          "name": "bond_info"
+        },
+        {
+          "name": "bond_mint",
+          "docs": [
+            "The bond mint"
+          ]
+        },
+        {
+          "name": "usdc_fee_vault",
+          "docs": [
+            "Protocol fee vault"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "factory_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "yield_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "yield_mint",
+          "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        },
+        {
+          "name": "user_yield_account",
+          "docs": [
+            "User's yield token account"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "user_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "yield_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_factory",
+      "discriminator": [
+        179,
+        64,
+        75,
+        250,
+        39,
+        254,
+        240,
+        178
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "docs": [
+            "The admin who will have authority over the factory",
+            "This account must be a signer as they're establishing control of the protocol"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "docs": [
+            "The factory state PDA that stores all protocol configurations",
+            "Seeds: [\"factory_state\"]",
+            "This account is initialized here and will store all factory-wide parameters"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "fee_mint",
+          "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        },
+        {
+          "name": "sol_fee_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  111,
+                  108,
+                  95,
+                  102,
+                  101,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "fee_vault",
+          "docs": [
+            "The fee collection ATA, owned by factory PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "factory_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "fee_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "min_collateral_ratio",
+          "type": "u16"
+        },
+        {
+          "name": "base_fee_rate",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "mint_tokens",
+      "discriminator": [
+        59,
+        132,
+        24,
+        246,
+        122,
+        39,
+        8,
+        243
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "stablecoin_state",
+          "writable": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_state",
+          "docs": [
+            "User's state PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_bond_account",
+          "docs": [
+            "User's stablebond token account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "user_stablecoin_account",
+          "docs": [
+            "User's stablecoin token account"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "user_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "stablecoin_mint",
+          "docs": [
+            "The stablecoin mint"
+          ],
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "docs": [
+            "Collateral vault"
+          ],
+          "writable": true
+        },
+        {
+          "name": "sol_fee_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  111,
+                  108,
+                  95,
+                  102,
+                  101,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "kyc_info"
+        },
+        {
+          "name": "oracle"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bond_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "pause_stablecoin",
+      "discriminator": [
+        62,
+        192,
+        45,
+        175,
+        83,
+        8,
+        239,
+        205
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stablecoin_state",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_bond",
+      "discriminator": [
+        114,
+        224,
+        192,
+        27,
+        21,
+        166,
+        109,
+        180
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bond_mint"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resume_stablecoin",
+      "discriminator": [
+        30,
+        112,
+        215,
+        210,
+        74,
+        139,
+        152,
+        158
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stablecoin_state",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "update_bond_config",
+      "discriminator": [
+        238,
+        194,
+        17,
+        158,
+        231,
+        167,
+        83,
+        205
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bond_mint"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "updates",
+          "type": {
+            "defined": {
+              "name": "BondConfigUpdate"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_factory_config",
+      "discriminator": [
+        219,
+        46,
+        19,
+        240,
+        1,
+        37,
+        160,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "docs": [
+            "The current admin who must sign to authorize changes"
+          ],
+          "signer": true
+        },
+        {
+          "name": "new_admin",
+          "docs": [
+            "Optional new admin if admin transfer is requested"
+          ],
+          "optional": true
+        },
+        {
+          "name": "factory_state",
+          "docs": [
+            "The factory state PDA containing configuration"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "fee_mint",
+          "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        },
+        {
+          "name": "fee_vault",
+          "docs": [
+            "The fee collection ATA, owned by factory PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "factory_state"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "fee_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "new_collector",
+          "docs": [
+            "Optional new collector to add"
+          ],
+          "optional": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "new_admin",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "new_min_collateral_ratio",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "new_base_fee_rate",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "new_fee_recipient",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_stablecoin",
+      "discriminator": [
+        128,
+        52,
+        56,
+        136,
+        69,
+        36,
+        60,
+        218
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "factory_state",
+          "docs": [
+            "Factory state PDA"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  102,
+                  97,
+                  99,
+                  116,
+                  111,
+                  114,
+                  121,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stablecoin_state",
+          "docs": [
+            "Stablecoin state PDA that we want to update"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  116,
+                  97,
+                  98,
+                  108,
+                  101,
+                  99,
+                  111,
+                  105,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_state.creator",
+                "account": "StablecoinState"
+              },
+              {
+                "kind": "account",
+                "path": "stablecoin_state.original_symbol",
+                "account": "StablecoinState"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "symbol",
+          "type": {
+            "option": "string"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AggregatorAccountData",
+      "discriminator": [
+        217,
+        230,
+        65,
+        101,
+        201,
+        162,
+        27,
+        125
+      ]
+    },
+    {
+      "name": "FactoryState",
+      "discriminator": [
+        91,
+        157,
+        184,
+        99,
+        123,
+        112,
+        102,
+        7
+      ]
+    },
+    {
+      "name": "SolFeeVault",
+      "discriminator": [
+        243,
+        105,
+        179,
+        83,
+        19,
+        67,
+        221,
+        86
+      ]
+    },
+    {
+      "name": "StablecoinState",
+      "discriminator": [
+        107,
+        33,
+        134,
+        54,
+        129,
+        13,
+        187,
+        151
+      ]
+    },
+    {
+      "name": "UserState",
+      "discriminator": [
+        72,
+        177,
+        85,
+        249,
+        76,
+        167,
+        186,
+        126
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "BondAdded",
+      "discriminator": [
+        49,
+        199,
+        208,
+        217,
+        88,
+        186,
+        82,
+        183
+      ]
+    },
+    {
+      "name": "BondConfigUpdated",
+      "discriminator": [
+        34,
+        200,
+        124,
+        24,
+        147,
+        133,
+        175,
+        79
+      ]
+    },
+    {
+      "name": "BondRemoved",
+      "discriminator": [
+        177,
+        200,
+        116,
+        123,
+        1,
+        244,
+        161,
+        240
+      ]
+    },
+    {
+      "name": "FactoryConfigUpdated",
+      "discriminator": [
+        215,
+        69,
+        11,
+        1,
+        99,
+        165,
+        45,
+        30
+      ]
+    },
+    {
+      "name": "FactoryInitialized",
+      "discriminator": [
+        20,
+        86,
+        103,
+        75,
+        20,
+        220,
+        162,
+        63
+      ]
+    },
+    {
+      "name": "StablecoinBurned",
+      "discriminator": [
+        235,
+        15,
+        32,
+        126,
+        86,
+        185,
+        36,
+        7
+      ]
+    },
+    {
+      "name": "StablecoinCreated",
+      "discriminator": [
+        15,
+        73,
+        199,
+        47,
+        148,
+        215,
+        195,
+        9
+      ]
+    },
+    {
+      "name": "StablecoinMinted",
+      "discriminator": [
+        78,
+        169,
+        253,
+        17,
+        186,
+        58,
+        17,
+        168
+      ]
+    },
+    {
+      "name": "StablecoinPaused",
+      "discriminator": [
+        72,
+        123,
+        16,
+        187,
+        50,
+        214,
+        82,
+        198
+      ]
+    },
+    {
+      "name": "StablecoinResumed",
+      "discriminator": [
+        235,
+        143,
+        126,
+        98,
+        196,
+        165,
+        218,
+        200
+      ]
+    },
+    {
+      "name": "StablecoinUpdated",
+      "discriminator": [
+        48,
+        198,
+        137,
+        67,
+        200,
+        121,
+        26,
+        85
+      ]
+    },
+    {
+      "name": "YieldCollected",
+      "discriminator": [
+        79,
+        119,
+        129,
+        72,
+        118,
+        91,
+        54,
+        42
+      ]
+    },
+    {
+      "name": "YieldDistributed",
+      "discriminator": [
+        107,
+        100,
+        4,
+        71,
+        95,
+        176,
+        248,
+        94
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidCollateralRatio",
+      "msg": "Invalid collateral ratio specified"
+    },
+    {
+      "code": 6001,
+      "name": "CollateralRatioTooLow",
+      "msg": "Collateral ratio below minimum required"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidUSDCMint",
+      "msg": "The USDC Mint is incorrect"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidFeeRate",
+      "msg": "Invalid fee rate specified"
+    },
+    {
+      "code": 6004,
+      "name": "FactoryAlreadyInitialized",
+      "msg": "Factory is already initialized"
+    },
+    {
+      "code": 6005,
+      "name": "FactoryPaused",
+      "msg": "Factory is currently paused"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidAdminAuthority",
+      "msg": "Invalid admin authority"
+    },
+    {
+      "code": 6007,
+      "name": "ExceedsMaximumValue",
+      "msg": "Operation exceeds maximum allowed value"
+    },
+    {
+      "code": 6008,
+      "name": "Unauthorized",
+      "msg": "Unauthorized access"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidNameLength",
+      "msg": "Invalid stablecoin name length"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidPayoutAccount",
+      "msg": "Invalid payout account"
+    },
+    {
+      "code": 6011,
+      "name": "NoCollateralToCollectFrom",
+      "msg": "No collateral to collect from"
+    },
+    {
+      "code": 6012,
+      "name": "PayoutDeserializationError",
+      "msg": "Failed to deserialize payout"
+    },
+    {
+      "code": 6013,
+      "name": "YieldCollectionTooFrequent",
+      "msg": "Yield collect is too frequent"
+    },
+    {
+      "code": 6014,
+      "name": "InvalidSymbolLength",
+      "msg": "Invalid stablecoin symbol length"
+    },
+    {
+      "code": 6015,
+      "name": "StaleError",
+      "msg": "Does not meet requirements"
+    },
+    {
+      "code": 6016,
+      "name": "AlreadyPaused",
+      "msg": "Stablecoin is already paused"
+    },
+    {
+      "code": 6017,
+      "name": "NotPaused",
+      "msg": "Stablecoin is not paused"
+    },
+    {
+      "code": 6018,
+      "name": "BondMintMismatch",
+      "msg": "Bond mint mismatch"
+    },
+    {
+      "code": 6019,
+      "name": "RebaseTooEarly",
+      "msg": "Rebase is too early"
+    },
+    {
+      "code": 6020,
+      "name": "MaxStablecoinsReached",
+      "msg": "Maximum number of stablecoins reached"
+    },
+    {
+      "code": 6021,
+      "name": "InvalidOracleConfig",
+      "msg": "Invalid oracle configuration"
+    },
+    {
+      "code": 6022,
+      "name": "StaleOraclePrice",
+      "msg": "Oracle price is too stale"
+    },
+    {
+      "code": 6023,
+      "name": "InvalidOraclePrice",
+      "msg": "Oracle price is not valid"
+    },
+    {
+      "code": 6024,
+      "name": "LowOracleConfidence",
+      "msg": "Oracle confidence is too low"
+    },
+    {
+      "code": 6025,
+      "name": "InvalidTargetCurrency",
+      "msg": "Invalid target currency"
+    },
+    {
+      "code": 6026,
+      "name": "InsufficientCollateral",
+      "msg": "Insufficient collateral provided"
+    },
+    {
+      "code": 6027,
+      "name": "InvalidSymbolFormat",
+      "msg": "Invalid symbol format"
+    },
+    {
+      "code": 6028,
+      "name": "CollateralRatioTooHigh",
+      "msg": "Collateral ratio exceeds maximum allowed"
+    },
+    {
+      "code": 6029,
+      "name": "BumpNotFound",
+      "msg": "PDA bump not found"
+    },
+    {
+      "code": 6030,
+      "name": "MathOverflow",
+      "msg": "Math overflow occurred"
+    },
+    {
+      "code": 6031,
+      "name": "InvalidOracleStaleness",
+      "msg": "Invalid oracle staleness configuration"
+    },
+    {
+      "code": 6032,
+      "name": "InvalidOracleConfidence",
+      "msg": "Invalid oracle confidence interval"
+    },
+    {
+      "code": 6033,
+      "name": "InvalidOracleUpdateCount",
+      "msg": "Invalid oracle update count"
+    },
+    {
+      "code": 6034,
+      "name": "InvalidPriceDeviation",
+      "msg": "Invalid price deviation threshold"
+    },
+    {
+      "code": 6035,
+      "name": "InsufficientOracleUpdates",
+      "msg": "Insufficient oracle updates"
+    },
+    {
+      "code": 6036,
+      "name": "ExcessivePriceDeviation",
+      "msg": "Price deviation exceeds maximum allowed"
+    },
+    {
+      "code": 6037,
+      "name": "InvalidKycAccount",
+      "msg": "Invalid KYC account"
+    },
+    {
+      "code": 6038,
+      "name": "FeeTooLarge",
+      "msg": "Fee is too large"
+    },
+    {
+      "code": 6039,
+      "name": "TooManyUsers",
+      "msg": "Maximum amount of users reached"
+    },
+    {
+      "code": 6040,
+      "name": "DivideByZero",
+      "msg": "Dividing by zero is not allowed"
+    },
+    {
+      "code": 6041,
+      "name": "InvalidTimestamp",
+      "msg": "The timestamp is invalid"
+    },
+    {
+      "code": 6042,
+      "name": "MissingOracleAccount",
+      "msg": "No oracle account identified"
+    },
+    {
+      "code": 6043,
+      "name": "InsufficientStablecoinBalance",
+      "msg": "Not enough stablecoins"
+    },
+    {
+      "code": 6044,
+      "name": "StablecoinPaused",
+      "msg": "Stablecoin paused"
+    },
+    {
+      "code": 6045,
+      "name": "RedeemAmountTooSmall",
+      "msg": "Redeem amount is too small"
+    },
+    {
+      "code": 6046,
+      "name": "InsufficientUserShare",
+      "msg": "User has insufficient share"
+    },
+    {
+      "code": 6047,
+      "name": "UserShareNotFound",
+      "msg": "TUser share was not found"
+    },
+    {
+      "code": 6048,
+      "name": "InvalidMintAmount",
+      "msg": "Invalid mint amount"
+    },
+    {
+      "code": 6049,
+      "name": "InvalidPrice",
+      "msg": "Invalid price"
+    },
+    {
+      "code": 6050,
+      "name": "NoYieldToDistribute",
+      "msg": "No yield to distribute"
+    },
+    {
+      "code": 6051,
+      "name": "NoUserPosition",
+      "msg": "No user position"
+    },
+    {
+      "code": 6052,
+      "name": "NoTotalSupply",
+      "msg": "No total supply"
+    },
+    {
+      "code": 6053,
+      "name": "ExcessiveSlippage",
+      "msg": "Excessive slippage"
+    },
+    {
+      "code": 6054,
+      "name": "SupplyCapExceeded",
+      "msg": "Supply cap exceeded"
+    },
+    {
+      "code": 6055,
+      "name": "UnsupportedBond",
+      "msg": "Bond is not supported"
+    },
+    {
+      "code": 6056,
+      "name": "UnauthorizedAdmin",
+      "msg": "Only admin can perform this action"
+    },
+    {
+      "code": 6057,
+      "name": "UnauthorizedAccess",
+      "msg": "Only authority can perform this action"
+    },
+    {
+      "code": 6058,
+      "name": "TooManyBonds",
+      "msg": "Maximum number of supported bonds reached"
+    },
+    {
+      "code": 6059,
+      "name": "InvalidTokenAccountOwner",
+      "msg": "Not the owner of token account"
+    },
+    {
+      "code": 6060,
+      "name": "InvalidBondMint",
+      "msg": "Bond is invalid"
+    },
+    {
+      "code": 6061,
+      "name": "BondAlreadyExists",
+      "msg": "Bond is already supported"
+    },
+    {
+      "code": 6062,
+      "name": "CollectorAlreadyExists",
+      "msg": "Yield collector already exists"
+    },
+    {
+      "code": 6063,
+      "name": "MaxCollectorsReached",
+      "msg": "Yield collectors has reached limit"
+    },
+    {
+      "code": 6064,
+      "name": "InvalidBondAccount",
+      "msg": "Invalid bond account"
+    },
+    {
+      "code": 6065,
+      "name": "InvalidPaymentFeed",
+      "msg": "Invalid payment feed"
+    },
+    {
+      "code": 6066,
+      "name": "BondDisabled",
+      "msg": "Bond is currently disabled"
+    },
+    {
+      "code": 6067,
+      "name": "ActiveCollateralExists",
+      "msg": "Bond has active collateral and cannot be removed"
+    },
+    {
+      "code": 6068,
+      "name": "BondNotFound",
+      "msg": "Bond not found"
+    },
+    {
+      "code": 6069,
+      "name": "DepositTooSmall",
+      "msg": "Deposit amount below minimum required"
+    },
+    {
+      "code": 6070,
+      "name": "InvalidName",
+      "msg": "Name is invalid"
+    },
+    {
+      "code": 6071,
+      "name": "InvalidSymbol",
+      "msg": "Symbol is invalid"
+    }
+  ],
+  "types": [
+    {
+      "name": "AggregatorAccountData",
+      "serialization": "bytemuckunsafe",
+      "repr": {
+        "kind": "rust",
+        "packed": true
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "docs": [
+              "Name of the aggregator to store on-chain."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "metadata",
+            "docs": [
+              "Metadata of the aggregator to store on-chain."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "_reserved1",
+            "docs": [
+              "Reserved."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "queue_pubkey",
+            "docs": [
+              "Pubkey of the queue the aggregator belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "oracle_request_batch_size",
+            "docs": [
+              "CONFIGS",
+              "Number of oracles assigned to an update request."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "min_oracle_results",
+            "docs": [
+              "Minimum number of oracle responses required before a round is validated."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "min_job_results",
+            "docs": [
+              "Minimum number of job results before an oracle accepts a result."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "min_update_delay_seconds",
+            "docs": [
+              "Minimum number of seconds required between aggregator rounds."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "start_after",
+            "docs": [
+              "Unix timestamp for which no feed update will occur before."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "variance_threshold",
+            "docs": [
+              "Change percentage required between a previous round and the current round. If variance percentage is not met, reject new oracle responses."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "force_report_period",
+            "docs": [
+              "Number of seconds for which, even if the variance threshold is not passed, accept new responses from oracles."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "expiration",
+            "docs": [
+              "Timestamp when the feed is no longer needed."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "consecutive_failure_count",
+            "docs": [
+              "Counter for the number of consecutive failures before a feed is removed from a queue. If set to 0, failed feeds will remain on the queue."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "next_allowed_update_time",
+            "docs": [
+              "Timestamp when the next update request will be available."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "is_locked",
+            "docs": [
+              "Flag for whether an aggregators configuration is locked for editing."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "crank_pubkey",
+            "docs": [
+              "Optional, public key of the crank the aggregator is currently using. Event based feeds do not need a crank."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "latest_confirmed_round",
+            "docs": [
+              "Latest confirmed update request result that has been accepted as valid."
+            ],
+            "type": {
+              "defined": {
+                "name": "AggregatorRound"
+              }
+            }
+          },
+          {
+            "name": "current_round",
+            "docs": [
+              "Oracle results from the current round of update request that has not been accepted as valid yet."
+            ],
+            "type": {
+              "defined": {
+                "name": "AggregatorRound"
+              }
+            }
+          },
+          {
+            "name": "job_pubkeys_data",
+            "docs": [
+              "List of public keys containing the job definitions for how data is sourced off-chain by oracles."
+            ],
+            "type": {
+              "array": [
+                "pubkey",
+                16
+              ]
+            }
+          },
+          {
+            "name": "job_hashes",
+            "docs": [
+              "Used to protect against malicious RPC nodes providing incorrect task definitions to oracles before fulfillment."
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Hash"
+                  }
+                },
+                16
+              ]
+            }
+          },
+          {
+            "name": "job_pubkeys_size",
+            "docs": [
+              "Number of jobs assigned to an oracle."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "jobs_checksum",
+            "docs": [
+              "Used to protect against malicious RPC nodes providing incorrect task definitions to oracles before fulfillment."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "authority",
+            "docs": [
+              "The account delegated as the authority for making account changes."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "history_buffer",
+            "docs": [
+              "Optional, public key of a history buffer account storing the last N accepted results and their timestamps."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "previous_confirmed_round_result",
+            "docs": [
+              "The previous confirmed round result."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "previous_confirmed_round_slot",
+            "docs": [
+              "The slot when the previous confirmed round was opened."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "disable_crank",
+            "docs": [
+              "Whether an aggregator is permitted to join a crank."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "job_weights",
+            "docs": [
+              "Job weights used for the weighted median of the aggregator's assigned job accounts."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "creation_timestamp",
+            "docs": [
+              "Unix timestamp when the feed was created."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "resolution_mode",
+            "docs": [
+              "Use sliding window or round based resolution",
+              "NOTE: This changes result propogation in latest_round_result"
+            ],
+            "type": {
+              "defined": {
+                "name": "AggregatorResolutionMode"
+              }
+            }
+          },
+          {
+            "name": "base_priority_fee",
+            "type": "u32"
+          },
+          {
+            "name": "priority_fee_bump",
+            "type": "u32"
+          },
+          {
+            "name": "priority_fee_bump_period",
+            "type": "u32"
+          },
+          {
+            "name": "max_priority_fee_multiplier",
+            "type": "u32"
+          },
+          {
+            "name": "parent_function",
+            "type": "pubkey"
+          },
+          {
+            "name": "_ebuf",
+            "docs": [
+              "Reserved for future info."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                90
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "AggregatorResolutionMode",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ModeRoundResolution"
+          },
+          {
+            "name": "ModeSlidingResolution"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AggregatorRound",
+      "serialization": "bytemuckunsafe",
+      "repr": {
+        "kind": "rust",
+        "packed": true
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "num_success",
+            "docs": [
+              "Maintains the number of successful responses received from nodes.",
+              "Nodes can submit one successful response per round."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "num_error",
+            "docs": [
+              "Number of error responses."
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "is_closed",
+            "docs": [
+              "Whether an update request round has ended."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "round_open_slot",
+            "docs": [
+              "Maintains the `solana_program::clock::Slot` that the round was opened at."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "round_open_timestamp",
+            "docs": [
+              "Maintains the `solana_program::clock::UnixTimestamp;` the round was opened at."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "result",
+            "docs": [
+              "Maintains the current median of all successful round responses."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "std_deviation",
+            "docs": [
+              "Standard deviation of the accepted results in the round."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "min_response",
+            "docs": [
+              "Maintains the minimum node response this round."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "max_response",
+            "docs": [
+              "Maintains the maximum node response this round."
+            ],
+            "type": {
+              "defined": {
+                "name": "SwitchboardDecimal"
+              }
+            }
+          },
+          {
+            "name": "oracle_pubkeys_data",
+            "docs": [
+              "Pubkeys of the oracles fulfilling this round."
+            ],
+            "type": {
+              "array": [
+                "pubkey",
+                16
+              ]
+            }
+          },
+          {
+            "name": "medians_data",
+            "docs": [
+              "Represents all successful node responses this round. `NaN` if empty."
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "SwitchboardDecimal"
+                  }
+                },
+                16
+              ]
+            }
+          },
+          {
+            "name": "current_payout",
+            "docs": [
+              "Current rewards/slashes oracles have received this round."
+            ],
+            "type": {
+              "array": [
+                "i64",
+                16
+              ]
+            }
+          },
+          {
+            "name": "medians_fulfilled",
+            "docs": [
+              "Keep track of which responses are fulfilled here."
+            ],
+            "type": {
+              "array": [
+                "bool",
+                16
+              ]
+            }
+          },
+          {
+            "name": "errors_fulfilled",
+            "docs": [
+              "Keeps track of which errors are fulfilled here."
+            ],
+            "type": {
+              "array": [
+                "bool",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BondAdded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "payment_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BondCollateralInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_collateral",
+            "type": "u64"
+          },
+          {
+            "name": "num_stablecoins",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BondConfigUpdate",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "is_enabled",
+            "type": {
+              "option": "bool"
+            }
+          },
+          {
+            "name": "custom_fee_rate",
+            "type": {
+              "option": {
+                "option": "u16"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BondConfigUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_enabled",
+            "type": "bool"
+          },
+          {
+            "name": "custom_fee_rate",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BondRemoved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FactoryConfigUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "min_collateral_ratio",
+            "type": "u16"
+          },
+          {
+            "name": "base_fee_rate",
+            "type": "u16"
+          },
+          {
+            "name": "protocol_version",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FactoryInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "min_collateral_ratio",
+            "type": "u16"
+          },
+          {
+            "name": "base_fee_rate",
+            "type": "u16"
+          },
+          {
+            "name": "protocol_version",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FactoryState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "is_paused",
+            "type": "bool"
+          },
+          {
+            "name": "min_collateral_ratio",
+            "type": "u16"
+          },
+          {
+            "name": "base_fee_rate",
+            "type": "u16"
+          },
+          {
+            "name": "stablecoin_count",
+            "type": "u32"
+          },
+          {
+            "name": "last_update",
+            "type": "i64"
+          },
+          {
+            "name": "allowed_bond_configs",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "StablebondConfig"
+                }
+              }
+            }
+          },
+          {
+            "name": "bond_collateral_tracking",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "BondCollateralInfo"
+                }
+              }
+            }
+          },
+          {
+            "name": "authorized_collectors",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "protocol_version",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hash",
+      "serialization": "bytemuckunsafe",
+      "repr": {
+        "kind": "rust",
+        "packed": true
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "docs": [
+              "The bytes used to derive the hash."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SolFeeVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total_fees_collected",
+            "type": "u64"
+          },
+          {
+            "name": "last_collection",
+            "type": "i64"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablebondConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "payment_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "min_creation_amount",
+            "type": "u64"
+          },
+          {
+            "name": "min_redemption_amount",
+            "type": "u64"
+          },
+          {
+            "name": "is_enabled",
+            "type": "bool"
+          },
+          {
+            "name": "custom_fee_rate",
+            "type": {
+              "option": "u16"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinBurned",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          },
+          {
+            "name": "stablecoin_amount",
+            "type": "u64"
+          },
+          {
+            "name": "bond_price",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "type": "string"
+          },
+          {
+            "name": "target_currency",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinMinted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_amount",
+            "type": "u64"
+          },
+          {
+            "name": "bond_price",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinPaused",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "stablecoin",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinResumed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "stablecoin",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "symbol",
+            "type": "string"
+          },
+          {
+            "name": "original_symbol",
+            "type": "string"
+          },
+          {
+            "name": "target_currency",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "last_updated",
+            "type": "i64"
+          },
+          {
+            "name": "user_shares",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "UserShare"
+                }
+              }
+            }
+          },
+          {
+            "name": "stablebond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "collateral_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "collateral_ratio",
+            "type": "u16"
+          },
+          {
+            "name": "total_supply",
+            "type": "u64"
+          },
+          {
+            "name": "total_collateral",
+            "type": "u64"
+          },
+          {
+            "name": "last_rebase",
+            "type": "i64"
+          },
+          {
+            "name": "total_rebase_amount",
+            "type": "u64"
+          },
+          {
+            "name": "last_yield_collection",
+            "type": "i64"
+          },
+          {
+            "name": "last_rate_update",
+            "type": "i64"
+          },
+          {
+            "name": "yield_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_yield_collected",
+            "type": "u64"
+          },
+          {
+            "name": "bond_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "fiat_oracle",
+            "type": "pubkey"
+          },
+          {
+            "name": "last_price_update",
+            "type": "i64"
+          },
+          {
+            "name": "is_paused",
+            "type": "bool"
+          },
+          {
+            "name": "fee_rate",
+            "type": "u16"
+          },
+          {
+            "name": "last_fee_collection",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "StablecoinUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SwitchboardDecimal",
+      "serialization": "bytemuckunsafe",
+      "repr": {
+        "kind": "rust",
+        "packed": true
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mantissa",
+            "docs": [
+              "The part of a floating-point number that represents the significant digits of that number, and that is multiplied by the base, 10, raised to the power of scale to give the actual value of the number."
+            ],
+            "type": "i128"
+          },
+          {
+            "name": "scale",
+            "docs": [
+              "The number of decimal places to move to the left to yield the actual value."
+            ],
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserShare",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          },
+          {
+            "name": "mint_amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "stablecoin",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_yield_collected",
+            "type": "u64"
+          },
+          {
+            "name": "last_yield_collection",
+            "type": "i64"
+          },
+          {
+            "name": "bond_amount",
+            "type": "u64"
+          },
+          {
+            "name": "stablecoin_amount",
+            "type": "u64"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "YieldCollected",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "collector",
+            "type": "pubkey"
+          },
+          {
+            "name": "stablecoin",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "YieldDistributed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "stablecoin",
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_fee",
+            "type": "u64"
+          },
+          {
+            "name": "user_yield",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}

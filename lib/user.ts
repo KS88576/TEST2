@@ -25,3 +25,10 @@ export interface UnverifiedUser {
   createdAt: Date;
   activeSince: Date;
 }
+
+// rusty_dave@Ebere:~/solana_stablecoin$ anchor deploy --provider.cluster devnet
+// Deploying cluster: https://api.devnet.solana.com
+// Upgrade authority: /home/rusty_dave/.config/solana/id.json
+// Deploying program "solana_stablecoin"...
+// Program path: /home/rusty_dave/solana_stablecoin/target/deploy/solana_stablecoin.so...
+// Program Id: 7gFZNhBQidDAqbzqbuFFzetrnordQLLpibV8hX5S2taU

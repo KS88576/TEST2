@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { LaunchModalProps } from '@/types';
+import { LaunchButton } from './LaunchButton';
 
 const LaunchModal: React.FC<LaunchModalProps> = () => {
   const [formData, setFormData] = useState({
@@ -16,11 +17,7 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle token launch logic here
-    console.log('Launching token:', formData);
-  };
+  const isFormValid = formData.name && formData.symbol && formData.currency;
 
   return (
     <DialogContent className="bg-[#37474F] border-[#00BCD4] text-white sm:max-w-[95%] md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto">
@@ -33,7 +30,7 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
           Enter the details for your new stablecoin token
         </p>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
           <div className="space-y-1">
             <label className="text-sm font-medium text-gray-300">Token Name</label>
             <input
@@ -76,14 +73,16 @@ const LaunchModal: React.FC<LaunchModalProps> = () => {
             />
           </div>
 
-          <button 
-            type="submit"
-            className="w-full p-2.5 mt-4 bg-[#00BCD4] rounded-lg hover:bg-[#00BCD4]/80 
-            transition-all duration-300 font-medium
-            shadow-[0_0_20px_rgba(0,188,212,0.3)] hover:shadow-[0_0_30px_rgba(0,188,212,0.5)]"
-          >
-            Launch Token
-          </button>
+          <LaunchButton
+            name={formData.name}
+            symbol={formData.symbol}
+            currency={formData.currency}
+            disabled={!isFormValid}
+            onSuccess={() => {
+              // Handle success - maybe close modal or reset form
+              setFormData({ name: '', symbol: '', currency: '' });
+            }}
+          />
         </form>
       </div>
     </DialogContent>
