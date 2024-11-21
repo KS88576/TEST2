@@ -81,7 +81,7 @@ export const LaunchButton: FC<LaunchButtonProps> = ({
       // USDC mint address
       const USDC_MINT = new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
 
-      // Your bond mint address (you'll need to set this)
+      // Bond mint address, we'll need to statically set this
       const BOND_MINT = new PublicKey("Your_Bond_Mint_Address");
       const BOND_INFO = new PublicKey("Your_Bond_Info_Address");
 
