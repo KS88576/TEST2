@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'grid-pattern': 
+        `repeating-linear-gradient(to right, #222 0px, #222 1px, black 1px, black 40px), 
+         repeating-linear-gradient(to bottom, #222 0px, #222 1px, black 1px, black 40px)`,
+    },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
