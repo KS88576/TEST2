@@ -5,6 +5,6 @@
       },
       "src/app/api/auth/signup/wallet/route.ts": {
         "maxDuration": 30
-      },
+      }
     }
   }
