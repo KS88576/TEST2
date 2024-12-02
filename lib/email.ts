@@ -11,7 +11,6 @@ const transporter = nodemailer.createTransport({
   maxConnections: 5,     // Increased from 1
   maxMessages: 100,
   rateDelta: 1000,       // Time between messages in ms
-  rateLimit: 30         // Increased messages per connection
 });
 
 export async function sendVerificationEmail(
