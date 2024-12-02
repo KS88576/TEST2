@@ -6,11 +6,7 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
-  },
-  pool: true,
-  maxConnections: 5,     // Increased from 1
-  maxMessages: 100,
-  rateDelta: 1000,       // Time between messages in ms
+  }
 });
 
 export async function sendVerificationEmail(
@@ -52,18 +48,8 @@ export async function sendVerificationEmail(
   };
 
   try {
-    const emailPromise = transporter.sendMail(mailOptions);
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error('Email timeout')), 25000)
-    );
-
-    const info = await Promise.race([emailPromise, timeoutPromise]) as SentMessageInfo;
-    console.log("Email send details:", {
-      messageId: info.messageId,
-      accepted: info.accepted,
-      rejected: info.rejected,
-      response: info.response
-    });
+    await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully");
     return true;
 
   } catch (err: unknown) {
