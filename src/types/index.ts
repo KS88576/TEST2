@@ -1,3 +1,4 @@
+
 export interface Token {
   name: string;
   symbol: string;
@@ -28,7 +29,7 @@ export interface Token {
   }
   
   export interface TokenDetailsModalProps {
-    token: Token | null;
+    token: StablecoinData | null;
     isOpen?: boolean;
     onClose?: () => void;
   }
@@ -41,6 +42,28 @@ export interface Token {
   
   export interface TabContentProps {
     activeTab: string;
-    tokens: Token[];
-    onSelectToken: (token: Token) => void;
+    tokens: (Token | StablecoinData)[];
+    onSelectToken: (token: Token | StablecoinData | null) => void;
+  }
+  
+
+  export interface StablecoinData extends Token {
+    apy: string;  // Make these required instead of optional
+    tvl: string;
+    volume24h: string;
+    holders: number;
+    marketCap: string;
+    pairedBond: string;
+    currency: string;
+  }
+
+  export interface TokenManageCardProps {
+    token: StablecoinData;
+    onTokenUpdate: (updatedToken: StablecoinData) => void;
+  }
+
+  export interface EditTokenModalProps {
+    token: StablecoinData;
+    onSave: (updatedToken: StablecoinData) => void;
+    onClose: () => void;
   }

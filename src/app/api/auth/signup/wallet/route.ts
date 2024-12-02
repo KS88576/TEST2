@@ -1,8 +1,6 @@
 // app/api/auth/signup/wallet/
 
-import { PublicKey } from '@solana/web3.js';
-import { verify } from '@noble/ed25519';
-import bs58 from 'bs58';
+import { verifyWalletSignature } from "@/lib/wallet";
 import { NextRequest, NextResponse } from "next/server";
 import { generateToken } from "@/app/utils/jwt";
 import clientPromise from "../../../../../../lib/mongodb";
@@ -17,36 +15,36 @@ interface WalletSignupRequest {
 }
 
 // Define a message format for signing
-const MESSAGE_PREFIX = "Sign this message to verify your wallet ownership for Stable.fun: ";
+// const MESSAGE_PREFIX = "Sign this message to verify your wallet ownership for Stable.fun: ";
 
-export default async function verifyWalletSignature(
-    walletAddress: string,
-    signature: string,
-    message: string
-): Promise<boolean> {
-    try {
-        // Verify the wallet address is valid
-        const publicKey = new PublicKey(walletAddress);
+// export default async function verifyWalletSignature(
+//     walletAddress: string,
+//     signature: string,
+//     message: string
+// ): Promise<boolean> {
+//     try {
+//         // Verify the wallet address is valid
+//         const publicKey = new PublicKey(walletAddress);
         
-        // Reconstruct the original signed message
-        const fullMessage = MESSAGE_PREFIX + message;
+//         // Reconstruct the original signed message
+//         const fullMessage = MESSAGE_PREFIX + message;
         
-        // Convert the message to Uint8Array
-        const messageBytes = new TextEncoder().encode(fullMessage);
+//         // Convert the message to Uint8Array
+//         const messageBytes = new TextEncoder().encode(fullMessage);
         
-        // Convert the signature from base58 to Uint8Array
-        const signatureBytes = bs58.decode(signature);
+//         // Convert the signature from base58 to Uint8Array
+//         const signatureBytes = bs58.decode(signature);
         
-        // Convert public key to Uint8Array
-        const publicKeyBytes = publicKey.toBytes();
+//         // Convert public key to Uint8Array
+//         const publicKeyBytes = publicKey.toBytes();
         
-        // Verify the signature
-        return await verify(signatureBytes, messageBytes, publicKeyBytes);
-    } catch (error) {
-        console.error('Signature verification error:', error);
-        return false;
-    }
-}
+//         // Verify the signature
+//         return await verify(signatureBytes, messageBytes, publicKeyBytes);
+//     } catch (error) {
+//         console.error('Signature verification error:', error);
+//         return false;
+//     }
+// }
 
 export async function POST(request: NextRequest) {
     try {

@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onLogoClick }) 
               ))}
               <div className="border-t border-[#00BCD4]/30 mt-2 pt-2 px-4 pb-2">
                 <div className="flex items-center justify-around">
-                  <Link href="https://twitter.com" 
+                  <Link href="https://x.com/heisdave7" 
                     className="p-2 hover:bg-white/10 rounded-lg transition-all group">
                     <FaXTwitter className="w-5 h-5 text-gray-400 group-hover:text-[#191a1a]" />
                   </Link>

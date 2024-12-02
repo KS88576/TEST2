@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { FiX } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { FaXTwitter, FaDiscord } from 'react-icons/fa6';
-import { SiFantom, SiSolana } from 'react-icons/si';
+// import { SiFantom, SiSolana } from 'react-icons/si';
 import Image from 'next/image';
 
 interface LoginModalProps {

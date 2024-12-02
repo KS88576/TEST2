@@ -89,7 +89,7 @@ export const LaunchButton: FC<LaunchButtonProps> = ({
       const [collateralVault] = PublicKey.findProgramAddressSync(
         [
           stablecoinState.toBuffer(),
-          Buffer.from([/* your_seed_bytes */]),
+          Buffer.from("factory_state"),
           BOND_MINT.toBuffer()
         ],
         new PublicKey("Your_Token_Program_ID")

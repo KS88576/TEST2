@@ -3,16 +3,18 @@
 import React, { useState } from 'react';
 import { FiEdit2, FiDollarSign, FiTrendingUp, FiUsers } from 'react-icons/fi';
 import { Dialog } from "@/components/ui/dialog";
-import { Token } from '@/types';
+import { TokenManageCardProps, StablecoinData } from '@/types';
 import EditTokenModal from './EditTokenModal';
-
-interface TokenManageCardProps {
-  token: Token;
-  onTokenUpdate: (updatedToken: Token) => void;
-}
 
 const TokenManageCard: React.FC<TokenManageCardProps> = ({ token, onTokenUpdate }) => {
   const [showEditModal, setShowEditModal] = useState(false);
+
+  const handleUpdate = (updates: Partial<StablecoinData>) => {
+    onTokenUpdate({
+      ...token,
+      ...updates
+    });
+  };
 
   return (
     <>
@@ -35,7 +37,6 @@ const TokenManageCard: React.FC<TokenManageCardProps> = ({ token, onTokenUpdate 
             <FiEdit2 className="w-5 h-5 text-[#00BCD4]" />
           </button>
         </div>
-
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           <div className="bg-[#2C393F] p-3 sm:p-4 rounded-lg border border-[#00BCD4]/20">
             <div className="flex items-center space-x-2 text-gray-400 mb-2 text-sm">
@@ -50,7 +51,9 @@ const TokenManageCard: React.FC<TokenManageCardProps> = ({ token, onTokenUpdate 
               <FiUsers className="w-4 h-4" />
               <span>Holders</span>
             </div>
-            <p className="text-lg sm:text-xl text-white truncate">1,234</p>
+            <p className="text-lg sm:text-xl text-white truncate">
+              {token.holders.toLocaleString()}
+            </p>
           </div>
 
           <div className="bg-[#2C393F] p-3 sm:p-4 rounded-lg border border-[#00BCD4]/20 col-span-2 sm:col-span-1">
@@ -58,7 +61,7 @@ const TokenManageCard: React.FC<TokenManageCardProps> = ({ token, onTokenUpdate 
               <FiTrendingUp className="w-4 h-4" />
               <span>Volume</span>
             </div>
-            <p className="text-lg sm:text-xl text-white truncate">$45.2K</p>
+            <p className="text-lg sm:text-xl text-white truncate">{token.volume24h}</p>
           </div>
         </div>
 

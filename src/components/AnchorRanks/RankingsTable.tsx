@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState, useMemo } from 'react';
-import { FiArrowUp, FiArrowDown, FiArrowRight, FiArrowLeft, FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
+import { FiArrowUp, FiArrowDown, FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 import { Token } from '@/types';
+import Pagination from './Pagination';
 
 interface RankingsTableProps {
   initialData: Token[];
@@ -169,33 +170,12 @@ const RankingsTable: React.FC<RankingsTableProps> = ({ initialData }) => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-between items-center px-6 py-4 bg-[#2C393F]">
-        <span className="text-gray-400">
-          Showing {(page - 1) * 20 + 1} to {Math.min(page * 20, sortedData.length)} of {sortedData.length}
-        </span>
-        <div className="flex space-x-4">
-          <button
-            onClick={() => setPage(p => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="px-4 py-2 bg-[#37474F] border border-[#00BCD4]/30 rounded-lg text-white 
-            hover:border-[#00BCD4] transition-colors flex items-center space-x-2
-            disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FiArrowLeft className="w-4 h-4" />
-            <span>Previous</span>
-          </button>
-          <button
-            onClick={() => setPage(p => p + 1)}
-            disabled={page * 20 >= sortedData.length}
-            className="px-4 py-2 bg-[#37474F] border border-[#00BCD4]/30 rounded-lg text-white 
-            hover:border-[#00BCD4] transition-colors flex items-center space-x-2
-            disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span>Next</span>
-            <FiArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
+      <Pagination 
+        page={page}
+        totalItems={sortedData.length}
+        itemsPerPage={20}
+        onPageChange={setPage}
+      />
     </div>
   );
 };

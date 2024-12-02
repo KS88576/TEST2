@@ -9,7 +9,6 @@ const QuickStats = () => {
 
   useEffect(() => {
     forexPriceService.initialize();
-
     return () => {
       forexPriceService.disconnect();
     };
@@ -30,44 +29,49 @@ const QuickStats = () => {
 
   return (
     <div className="bg-[#2C393F]">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-wrap justify-center md:justify-between gap-4 text-sm">
-          <div className="flex items-center space-x-8">
+      <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 text-xs sm:text-sm">
+          {/* Forex Pairs */}
+          <div className="grid grid-cols-2 sm:flex items-center gap-4 sm:gap-8 w-full sm:w-auto">
             {['USD/MXN', 'GBP/USD', 'USD/TRY', 'EUR/USD'].map((symbol) => (
-              <div key={symbol} className={isLoading ? 'animate-pulse' : ''}>
+              <div key={symbol} className={`${isLoading ? 'animate-pulse' : ''}`}>
                 <span className="text-gray-400">{symbol}:</span>
                 {error ? (
-                  <span className="text-red-400 ml-2">Error: {error}</span>
+                  <span className="text-red-400 ml-1 sm:ml-2">Error: {error}</span>
                 ) : isLoading ? (
-                  <span className="text-gray-400 ml-2">Loading...</span>
+                  <span className="text-gray-400 ml-1 sm:ml-2">Loading...</span>
                 ) : prices[symbol] ? (
-                  <div className="inline-flex items-center">
-                    <span className={`ml-2 ${
+                  <div className="inline-flex items-center flex-wrap">
+                    <span className={`ml-1 sm:ml-2 ${
                       prices[symbol].change24h >= 0 ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {formatPrice(prices[symbol].price)}
-                      {' ('}
-                      {prices[symbol].change24h >= 0 ? '+' : ''}
-                      {formatChange(prices[symbol].change24h)}
-                      {'%)'}
+                      <span className="whitespace-nowrap">
+                        {' ('}
+                        {prices[symbol].change24h >= 0 ? '+' : ''}
+                        {formatChange(prices[symbol].change24h)}
+                        {'%)'}
+                      </span>
                     </span>
                   </div>
                 ) : (
-                  <span className="text-gray-400 ml-2">
+                  <span className="text-gray-400 ml-1 sm:ml-2">
                     Unavailable
                   </span>
                 )}
               </div>
             ))}
           </div>
-          <div className="flex items-center space-x-4">
+
+          {/* Stats */}
+          <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
             <div>
               <span className="text-gray-400">Total APY:</span>
-              <span className="text-white ml-2">19.4%</span>
+              <span className="text-white ml-1 sm:ml-2">19.4%</span>
             </div>
             <div>
               <span className="text-gray-400">24h Volume:</span>
-              <span className="text-[#00BCD4] ml-2">$24.5M</span>
+              <span className="text-[#00BCD4] ml-1 sm:ml-2">$24.5M</span>
             </div>
           </div>
         </div>

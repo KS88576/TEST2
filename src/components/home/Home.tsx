@@ -1,27 +1,24 @@
-import { Roboto_Mono } from 'next/font/google';
-import Image from 'next/image';
-import { FiArrowDown, FiGithub } from 'react-icons/fi';
-import { FaDiscord } from "react-icons/fa"
-import "./background-grid.css"
-import { FaXTwitter } from 'react-icons/fa6';
+"use client"
 
-const robotoMono = Roboto_Mono({
-    subsets: ['latin'],
-    weight: ['400', '700'],
-    variable: '--font-liberation-mono'
-});
+import Image from 'next/image';
+import Link from 'next/link';
+import { FiArrowDown, FiGithub } from 'react-icons/fi';
+import { FaDiscord } from "react-icons/fa";
+import { FaXTwitter } from 'react-icons/fa6';
+import "./background-grid.css";
+
 
 const Home = () => {
     return (
-        <div className={`${robotoMono.variable} min-h-screen bg-gradient-to-br from-[#37474F] to-[#263238] text-white overflow-hidden relative`}>
+        <div className={`font-mono max-h-screen bg-gradient-to-br from-[#37474F] to-[#263238] text-white relative`}>
             {/* Background Grid Effect */}
             <div className="absolute inset-0 opacity-10 bg-grid-white/[0.05]"></div>
 
-            <div className='px-6 py-12 relative grico'>
+            <div className='px-6 py-12 relative grico h-full flex flex-col justify-center items-center'>
                 {/* Header Section */}
-                <div className='flex flex-col items-center text-center space-y-6 z-30 relative'>
+                <div className='flex flex-col items-center text-center space-y-4 z-30 relative'>
                     {/* Logo and Title */}
-                    <div className="flex items-center justify-center space-x-3">
+                    <div className="flex items-center justify-center space-x-3 animate-pulse">
                         <div className="w-14 h-14 relative">
                             <Image
                                 src="/stabledotfun.png"
@@ -36,7 +33,7 @@ const Home = () => {
                     </div>
 
                     {/* Hero Text */}
-                    <div className="max-w-2xl mx-auto space-y-4">
+                    <div className="max-w-2xl space-y-4 animate-fadeIn">
                         <h2 className="text-4xl font-bold text-white">
                             Welcome to Stable.fun
                         </h2>
@@ -46,57 +43,19 @@ const Home = () => {
                         </p>
 
                         {/* CTA Button */}
-                        <div className="pt-4 w-full flex items-center justify-center mb-3 z-50">
+                        <div className="pt-4 w-full flex items-center justify-center mb-3 z-50 animate-fadeInUp">
+                        <Link href="/">
                             <button
-                                className="group flex items-center justify-center px-5 py-2.5 rounded-lg bg-[#cbe8ff34] border border-[#cbe8ff] text-[#cbe8ff] hover:bg-[#cbe8ff]/10 transition-all duration-300 hover:scale-105 cursor-pointer"
+                            className="group flex items-center justify-center px-6 py-3 rounded-lg bg-[#cbe8ff34] border border-[#cbe8ff] text-[#cbe8ff] hover:bg-[#cbe8ff]/10 transition-all duration-300 hover:scale-105 cursor-pointer"
                             >
-                                Get Started
-                                <FiArrowDown className="ml-2 group-hover:animate-bounce" />
+                            Get Started
+                            <FiArrowDown className="ml-2 group-hover:animate-bounce" />
                             </button>
+                        </Link>
                         </div>
                     </div>
-
-                    {/* Stablecoin Gathering Visualization */}
-                    <div className='relative w-full max-w-lg aspect-square mt-10'>
-                        <div className='absolute inset-0 flex items-center justify-center'>
-                            {[0, 1, 2, 3].map((index) => (
-                                <div
-                                    key={index}
-                                    className={`
-                                        absolute rounded-full overflow-hidden 
-                                        w-16 h-16 
-                                        animate-orbit
-                                        opacity-80
-                                        transition-transform duration-1000
-                                        ${index === 0 ? 'orbit-1' :
-                                            index === 1 ? 'orbit-2' :
-                                                index === 2 ? 'orbit-3' :
-                                                    'orbit-4'}
-                                    `}
-                                >
-                                    <Image
-                                        src="/spl-cetes.png"
-                                        alt='cetes stable'
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            ))}
-
-                            {/* Central Logo */}
-                            <div className="w-48 h-48 relative z-10">
-                                <Image
-                                    src="/stabledotfun.png"
-                                    alt="Stable dot fun logo"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Social Links */}
-                    <div className="pt-6 space-y-3">
+                    <div className="pt-6 space-y-3 animate-fadeInUp">
                         <p className="text-xs text-gray-400 opacity-75 text-center">
                             Any questions? The friendliest people are here to welcome you and help you!
                         </p>
@@ -104,17 +63,17 @@ const Home = () => {
                             {[
                                 {
                                     Icon: FaXTwitter,
-                                    href: "https://twitter.com/stabledotfun",
-                                    hoverColor: "hover:text-[#1DA1F2]"
+                                    href: "https://x.com/heisdave7",
+                                    hoverColor: "hover:text-[#1B1B1B]"
                                 },
                                 {
                                     Icon: FiGithub,
-                                    href: "https://github.com/stablefun",
-                                    hoverColor: "hover:text-[#6cc644]"
+                                    href: "https://github.com/donjne/stabledotfun",
+                                    hoverColor: "hover:text-[#1B1B1B]"
                                 },
                                 {
                                     Icon: FaDiscord,
-                                    href: "https://discord.gg/stablefun",
+                                    href: "https://discord.gg/stabledotfun",
                                     hoverColor: "hover:text-[#5865F2]"
                                 }
                             ].map(({ Icon, href, hoverColor }, index) => (
@@ -138,30 +97,33 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Custom CSS for orbital animation */}
             <style jsx global>{`
-                @keyframes orbit-1 {
-                    0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
-                    100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
-                }
-                @keyframes orbit-2 {
-                    0% { transform: rotate(90deg) translateX(100px) rotate(-90deg); }
-                    100% { transform: rotate(450deg) translateX(100px) rotate(-450deg); }
-                }
-                @keyframes orbit-3 {
-                    0% { transform: rotate(180deg) translateX(100px) rotate(-180deg); }
-                    100% { transform: rotate(540deg) translateX(100px) rotate(-540deg); }
-                }
-                @keyframes orbit-4 {
-                    0% { transform: rotate(270deg) translateX(100px) rotate(-270deg); }
-                    100% { transform: rotate(630deg) translateX(100px) rotate(-630deg); }
+                @keyframes fadeIn {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
                 }
 
-                .orbit-1 { animation: orbit-1 10s linear infinite; }
-                .orbit-2 { animation: orbit-2 10s linear infinite; }
-                .orbit-3 { animation: orbit-3 10s linear infinite; }
-                .orbit-4 { animation: orbit-4 10s linear infinite; }
+                @keyframes fadeInUp {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+                }
+
+                @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                }
+
+                .animate-fadeIn {
+                animation: fadeIn 1s ease-in-out;
+                }
+
+                .animate-fadeInUp {
+                animation: fadeInUp 1s ease-in-out;
+                }
+
+                .animate-pulse {
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                }
             `}</style>
         </div>
     );

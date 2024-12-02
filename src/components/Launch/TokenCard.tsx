@@ -2,12 +2,23 @@
 
 import React, { useState } from 'react';
 import { FiDollarSign } from 'react-icons/fi';
-import { TokenCardProps } from '@/types';
+import { TokenCardProps, StablecoinData } from '@/types';
 import { Dialog } from "@/components/ui/dialog";
 import TokenDetailsModal from './TokenDetailsModal';
 
 const TokenCard: React.FC<TokenCardProps> = ({ token, onSelect }) => {
   const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  const tokenDetails: StablecoinData = {
+    ...token,
+    apy: token.apy || "0%",
+    tvl: token.tvl || "$0",
+    volume24h: "$0",
+    holders: 0,
+    marketCap: token.marketCap || "$0",
+    pairedBond: "-",
+    currency: "USD",
+  };
 
   return (
     <>
@@ -35,7 +46,7 @@ const TokenCard: React.FC<TokenCardProps> = ({ token, onSelect }) => {
       </div>
 
       <Dialog open={showDetails} onOpenChange={setShowDetails}>
-        <TokenDetailsModal token={token} />
+        <TokenDetailsModal token={tokenDetails} />
       </Dialog>
     </>
   );

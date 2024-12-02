@@ -29,18 +29,10 @@ const WalletLogin: React.FC<WalletLoginProps> = ({ onConnect }) => {
 
     try {
       await onConnect(publicKey.toString(), signMessage);
-      toast({
-        title: 'Connected!',
-        description: 'Wallet connected successfully',
-        variant: 'success',
-      });
+      toast.success('Wallet connected successfully');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to connect wallet');
-      toast({
-        title: 'Error',
-        description: err instanceof Error ? err.message : 'Failed to connect wallet',
-        variant: 'destructive',
-      });
+      toast.error('Failed to connect wallet');
     } finally {
       setIsLoading(false);
     }

@@ -2,24 +2,26 @@
 
 import React, { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Token } from '@/types';
+import { EditTokenModalProps, StablecoinData } from '@/types';
 import { FiSave, FiX } from 'react-icons/fi';
-
-interface EditTokenModalProps {
-  token: Token;
-  onSave: (updatedToken: Token) => void;
-  onClose: () => void;
-}
 
 const EditTokenModal: React.FC<EditTokenModalProps> = ({ token, onSave, onClose }) => {
   const [formData, setFormData] = useState({
     name: token.name,
-    symbol: token.symbol
+    symbol: token.symbol,
+    price: token.price,
+    volume24h: token.volume24h,
+    holders: token.holders,
+    apy: token.apy
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave({ ...token, ...formData });
+    onSave({ 
+      ...token, 
+      ...formData,
+      holders: Number(formData.holders)  // Ensure holders remains a number
+    });
     onClose();
   };
 
@@ -48,20 +50,42 @@ const EditTokenModal: React.FC<EditTokenModalProps> = ({ token, onSave, onClose 
             className="w-full p-2.5 sm:p-3 rounded-lg bg-[#2C393F] border border-[#00BCD4]/30 
               focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white text-sm sm:text-base
               placeholder-gray-400 transition-all duration-200"
-            placeholder="Enter token name"
           />
         </div>
 
         <div className="space-y-2 sm:space-y-3">
-          <label className="text-sm font-medium text-gray-300 block">Token Symbol</label>
+          <label className="text-sm font-medium text-gray-300 block">Price</label>
           <input
             type="text"
-            value={formData.symbol}
-            onChange={(e) => setFormData(prev => ({ ...prev, symbol: e.target.value }))}
+            value={formData.price}
+            onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
             className="w-full p-2.5 sm:p-3 rounded-lg bg-[#2C393F] border border-[#00BCD4]/30 
               focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white text-sm sm:text-base
               placeholder-gray-400 transition-all duration-200"
-            placeholder="Enter token symbol"
+          />
+        </div>
+
+        <div className="space-y-2 sm:space-y-3">
+          <label className="text-sm font-medium text-gray-300 block">24h Volume</label>
+          <input
+            type="text"
+            value={formData.volume24h}
+            onChange={(e) => setFormData(prev => ({ ...prev, volume24h: e.target.value }))}
+            className="w-full p-2.5 sm:p-3 rounded-lg bg-[#2C393F] border border-[#00BCD4]/30 
+              focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white text-sm sm:text-base
+              placeholder-gray-400 transition-all duration-200"
+          />
+        </div>
+
+        <div className="space-y-2 sm:space-y-3">
+          <label className="text-sm font-medium text-gray-300 block">APY</label>
+          <input
+            type="text"
+            value={formData.apy}
+            onChange={(e) => setFormData(prev => ({ ...prev, apy: e.target.value }))}
+            className="w-full p-2.5 sm:p-3 rounded-lg bg-[#2C393F] border border-[#00BCD4]/30 
+              focus:border-[#00BCD4] focus:ring-2 focus:ring-[#00BCD4]/20 text-white text-sm sm:text-base
+              placeholder-gray-400 transition-all duration-200"
           />
         </div>
 

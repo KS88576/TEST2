@@ -1,5 +1,5 @@
-
-import React from "react";
+"use client"
+import React, { useState } from "react";
 
 const FaqSection = () => {
   const faqs = [
@@ -11,7 +11,7 @@ const FaqSection = () => {
     {
       question: "How does stablecoin creation work?",
       answer:
-        "Our platform enables you to create custom stablecoins effortlessly. Simply define your parameters, such as the underlying asset and issuance amount, and the system handles the rest using Solana's secure blockchain infrastructure.",
+        "Our platform enables you to create custom stablecoins effortlessly. Simply define your parameters, such as the underlying asset, and the system handles the rest.",
     },
     {
       question: "Is it safe?",
@@ -30,26 +30,50 @@ const FaqSection = () => {
     },
   ];
 
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
+  };
+
   return (
-    <section className="bg-gray-900 text-gray-100 py-16 px-6">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-blue-400 mb-6">
+    <section className="bg-gradient-to-br from-[#37474F] to-[#263238] text-gray-100 py-20 px-6">
+      <div className="max-w-5xl mx-auto text-center animate-fadeInUp">
+        <h2 className="text-4xl font-bold text-[#00BCD4] mb-6">
           Frequently Asked Questions
         </h2>
         <p className="text-gray-400 mb-12">
-          Have questions? We’ve got answers to help you get started!
+          Have questions? We've got answers to help you get started!
         </p>
       </div>
       <div className="max-w-4xl mx-auto">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-gray-800 rounded-lg p-6 mb-4 shadow-md"
+            className={`
+              bg-[#263238] rounded-lg p-6 mb-4 shadow-md animate-fadeInUp
+              ${expandedFaq === index ? 'bg-[#1c2531] border-[#00BCD4]' : ''}
+            `}
+            style={{ animationDelay: `${index * 0.2}s` }}
+            onClick={() => toggleFaq(index)}
           >
-            <h3 className="text-xl font-medium text-blue-300">
-              {faq.question}
-            </h3>
-            <p className="text-gray-400 mt-3">{faq.answer}</p>
+            <div className="flex items-center justify-between">
+              <h3 className={`text-xl font-medium ${expandedFaq === index ? 'text-[#00BCD4]' : ''}`}>
+                {faq.question}
+              </h3>
+              <button
+                className={`
+                  text-[#00BCD4] 
+                  transition-transform duration-300
+                  ${expandedFaq === index ? 'rotate-180' : ''}
+                `}
+              >
+                &#8593;
+              </button>
+            </div>
+            {expandedFaq === index && (
+              <p className="text-gray-400 mt-3">{faq.answer}</p>
+            )}
           </div>
         ))}
       </div>

@@ -106,12 +106,12 @@ const ApeOrSell: React.FC = () => {
             </tbody>
           </table>
         </div>
-<Pagination
-  currentPage={currentPage}
-  totalItems={filteredTokens.length}
-  itemsPerPage={itemsPerPage}
-  onPageChange={setCurrentPage}
-/>
+    <Pagination
+      currentPage={currentPage}
+      totalItems={filteredTokens.length}
+      itemsPerPage={itemsPerPage}
+      onPageChange={setCurrentPage}
+    />
 </div>
 
 {/* Stats Section */}

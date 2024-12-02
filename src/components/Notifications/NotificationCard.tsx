@@ -13,12 +13,12 @@ interface NotificationCardProps {
 const NotificationCard: React.FC<NotificationCardProps> = ({ notification, onMarkAsRead }) => {
   const getIcon = () => {
     switch (notification.type) {
-      case 'price': return <FiDollarSign className="w-5 h-5" />;
-      case 'liquidity': return <FiDroplet className="w-5 h-5" />;
-      case 'volume': return <FiActivity className="w-5 h-5" />;
-      case 'apy': return <FiTrendingUp className="w-5 h-5" />;
-      case 'launch': return <FiRefreshCw className="w-5 h-5" />;
-      default: return <FiClock className="w-5 h-5" />;
+      case 'price': return <FiDollarSign className="w-4 h-4 sm:w-5 sm:h-5" />;
+      case 'liquidity': return <FiDroplet className="w-4 h-4 sm:w-5 sm:h-5" />;
+      case 'volume': return <FiActivity className="w-4 h-4 sm:w-5 sm:h-5" />;
+      case 'apy': return <FiTrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />;
+      case 'launch': return <FiRefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />;
+      default: return <FiClock className="w-4 h-4 sm:w-5 sm:h-5" />;
     }
   };
 
@@ -32,31 +32,31 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification, onMar
 
   return (
     <div 
-      className={`relative p-4 rounded-lg border transition-all duration-300 ${
+      className={`relative p-3 sm:p-4 rounded-lg border transition-all duration-300 ${
         notification.read 
           ? 'bg-[#2C393F]/50 border-[#00BCD4]/20' 
           : `${getImportanceColor()} hover:border-opacity-50`
       }`}
     >
-      <div className="flex items-start space-x-4">
-        <div className={`p-2 rounded-lg ${notification.read ? 'bg-[#00BCD4]/10' : 'bg-current/10'}`}>
+      <div className="flex items-start space-x-3 sm:space-x-4">
+        <div className={`p-1.5 sm:p-2 rounded-lg ${notification.read ? 'bg-[#00BCD4]/10' : 'bg-current/10'}`}>
           {getIcon()}
         </div>
         
-        <div className="flex-1">
-          <div className="flex items-center justify-between">
-            <h4 className="font-medium text-white">{notification.tokenSymbol}</h4>
-            <span className="text-sm text-gray-400">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-1 sm:gap-0">
+            <h4 className="font-medium text-sm sm:text-base text-white">{notification.tokenSymbol}</h4>
+            <span className="text-xs sm:text-sm text-gray-400">
               {formatDistanceToNow(notification.timestamp, { addSuffix: true })}
             </span>
           </div>
           
-          <p className="text-gray-300 mt-1">{notification.message}</p>
+          <p className="text-gray-300 text-sm sm:text-base mt-1">{notification.message}</p>
           
           {notification.data && (
-            <div className="mt-2 flex items-center space-x-4 text-sm">
+            <div className="mt-2 flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
               {notification.data.oldValue && notification.data.newValue && (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1 sm:space-x-2">
                   <span className="text-gray-400">{notification.data.oldValue}</span>
                   <span>→</span>
                   <span className="text-white">{notification.data.newValue}</span>
@@ -75,7 +75,8 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification, onMar
       {!notification.read && (
         <button
           onClick={() => onMarkAsRead(notification.id)}
-          className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+          className="absolute top-2 sm:top-4 right-2 sm:right-4 text-xs sm:text-sm text-white/50 
+            hover:text-white transition-colors"
         >
           Mark as read
         </button>

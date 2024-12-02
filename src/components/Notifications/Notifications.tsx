@@ -89,33 +89,33 @@ const Notifications: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
+    <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 space-y-4 sm:space-y-8">
       {/* Notification Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-[#2C393F] rounded-lg p-6 border border-[#00BCD4]/30">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4">
+        <div className="bg-[#2C393F] rounded-lg p-3 sm:p-6 border border-[#00BCD4]/30">
           <div className="flex items-center justify-between">
-            <h3 className="text-white">Unread</h3>
-            <FiBell className="w-5 h-5 text-[#00BCD4]" />
+            <h3 className="text-white text-sm sm:text-base">Unread</h3>
+            <FiBell className="w-4 h-4 sm:w-5 sm:h-5 text-[#00BCD4]" />
           </div>
-          <p className="text-2xl font-bold text-[#00BCD4] mt-2">
+          <p className="text-xl sm:text-2xl font-bold text-[#00BCD4] mt-1 sm:mt-2">
             {notifications.filter(n => !n.read).length}
           </p>
         </div>
-        <div className="bg-[#2C393F] rounded-lg p-6 border border-[#00BCD4]/30">
+        <div className="bg-[#2C393F] rounded-lg p-3 sm:p-6 border border-[#00BCD4]/30">
           <div className="flex items-center justify-between">
-            <h3 className="text-white">Subscriptions</h3>
-            <FiSettings className="w-5 h-5 text-[#00BCD4]" />
+            <h3 className="text-white text-sm sm:text-base">Subscriptions</h3>
+            <FiSettings className="w-4 h-4 sm:w-5 sm:h-5 text-[#00BCD4]" />
           </div>
-          <p className="text-2xl font-bold text-[#00BCD4] mt-2">
+          <p className="text-xl sm:text-2xl font-bold text-[#00BCD4] mt-1 sm:mt-2">
             {subscribedTokens.length}
           </p>
         </div>
-        <div className="bg-[#2C393F] rounded-lg p-6 border border-[#00BCD4]/30">
+        <div className="bg-[#2C393F] rounded-lg p-3 sm:p-6 border border-[#00BCD4]/30">
           <div className="flex items-center justify-between">
-            <h3 className="text-white">Today's Alerts</h3>
-            <FiFilter className="w-5 h-5 text-[#00BCD4]" />
+            <h3 className="text-white text-sm sm:text-base">Today's Alerts</h3>
+            <FiFilter className="w-4 h-4 sm:w-5 sm:h-5 text-[#00BCD4]" />
           </div>
-          <p className="text-2xl font-bold text-[#00BCD4] mt-2">
+          <p className="text-xl sm:text-2xl font-bold text-[#00BCD4] mt-1 sm:mt-2">
             {notifications.filter(n => 
               new Date().toDateString() === n.timestamp.toDateString()
             ).length}
@@ -131,10 +131,10 @@ const Notifications: React.FC = () => {
         onToggleUnread={() => setShowUnread(prev => !prev)}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
         {/* Notifications Section */}
-        <div className="lg:col-span-2 space-y-4">
-          <h2 className="text-xl font-bold text-white mb-4">Recent Notifications</h2>
+        <div className="lg:col-span-2 space-y-3 sm:space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-4">Recent Notifications</h2>
           {filteredNotifications.length > 0 ? (
             filteredNotifications.map(notification => (
               <NotificationCard
@@ -144,16 +144,16 @@ const Notifications: React.FC = () => {
               />
             ))
           ) : (
-            <div className="text-center py-8 bg-[#2C393F] rounded-lg border border-[#00BCD4]/30">
-              <FiBell className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-400">No notifications found</p>
+            <div className="text-center py-6 sm:py-8 bg-[#2C393F] rounded-lg border border-[#00BCD4]/30">
+              <FiBell className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400 mx-auto mb-2" />
+              <p className="text-gray-400 text-sm sm:text-base">No notifications found</p>
             </div>
           )}
         </div>
 
         {/* Subscriptions Section */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-white mb-4">Subscriptions</h2>
+        <div className="space-y-3 sm:space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-4">Subscriptions</h2>
           {subscribedTokens.map(token => (
             <TokenSubscriptionCard
               key={token.id}

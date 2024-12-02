@@ -4,6 +4,7 @@ import React from 'react';
 import CrownToken from './CrownToken';
 import RankingsTable from './RankingsTable';
 import { Token } from '@/types';
+import TopPerformersHeader from './TopPerformersHeader';
 
 const AnchorRanks: React.FC = () => {
   const topToken: Token = {
@@ -71,13 +72,7 @@ const AnchorRanks: React.FC = () => {
 
       {/* Rankings Table */}
       <div className="mt-12">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-white">Top Performers</h2>
-          <div className="bg-[#2C393F] px-4 py-2 rounded-lg border border-[#00BCD4]/30">
-            <span className="text-[#00BCD4]">{topPerformers.length}</span>
-            <span className="text-gray-400 ml-2">tokens listed</span>
-          </div>
-        </div>
+        <TopPerformersHeader count={topPerformers.length} />
         <RankingsTable initialData={topPerformers} />
       </div>
 

@@ -4,19 +4,26 @@ import React from 'react';
 import { FaChessKing, FaArrowTrendUp, FaDollarSign } from 'react-icons/fa6';
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import TokenDetailsModal from '@/components/Launch/TokenDetailsModal';
-import { Token } from '@/types';
+import { Token, StablecoinData } from '@/types';
 
 interface CrownTokenProps {
   token: Token;
 }
 
 const CrownToken: React.FC<CrownTokenProps> = ({ token }) => {
-  const tokenData: Token = {
+  const tokenData: StablecoinData = {
     ...token,
-    supply: token.tvl || '0',
-    comments: [],
-    marketCap: token.marketCap || '0',
-    type: 'stablebond'
+    apy: token.apy || "0%",
+    tvl: token.tvl || "$0",
+    volume24h: "$0",
+    holders: 0,
+    supply: token.supply || "0",
+    marketCap: token.marketCap || "$0",
+    pairedBond: "-",
+    currency: "USD",
+    type: 'stablebond',
+    comments: token.comments || [],
+    change: token.change || 0
   };
 
   return (
