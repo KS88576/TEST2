@@ -3,12 +3,10 @@ import nodemailer from 'nodemailer';
 
 // Create transporter using Gmail
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD, // Use app-specific password
+    pass: process.env.EMAIL_PASSWORD, // Use app-specific password
   },
 });
 
@@ -64,8 +62,17 @@ export async function sendVerificationEmail(
 
     console.log("Verification email sent successfully");
     return true;
-  } catch (error) {
-    console.error("Error sending verification email:", error);
+  } catch (err: unknown) {
+    console.error("Error sending verification email:", err);
+    
+    if (err && typeof err === 'object' && 'code' in err) {
+        if (err.code === 'EAUTH') {
+            throw new Error("Email authentication failed. Please check credentials.");
+        } else if (err.code === 'ETIMEDOUT') {
+            throw new Error("Email sending timed out. Please try again.");
+        }
+    }
+    
     throw new Error("Failed to send verification email");
   }
 }

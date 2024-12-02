@@ -103,13 +103,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// let's have a small text that would say, "Don't have an account? Sign up now". Then when we click on signup it will close all other modals that we're open (eg. the LoginModal) and it will open the SignupModal which will be another component. We'll write the code for SignupModal in another component.
-
-// Let's update our ui to work with the flow of our endpoint logic, for example, the flow of Signup for email: Enter email -> Enter username -> generate wallet and show the user their wallet address and necessary keys to access their wallet -> ask the user to verify their email to activate their account -> verified email will result in a successfully created account.
-
-// We'll use toast messages after every successful operation or failure operation.
-
-// For the content of the signup component, we will have two other components, EmailSignup and WalletSignup. For EmailSignup, a user can input their email and username and we would be making use of our endpoint api/auth/signup/email when we click on the Continue button. If the POST request we made is successful, then we can close the modal and the login button that was at the header will be replaced with the username of the user and a dropdown next to it (this will be the same case for LoginModal after the POST request is successful). 
-
-// For wallet signup, we will just have our button for connecting wallet and entering a username then make our POST request to api/auth/signup/email, we wi
