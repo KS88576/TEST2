@@ -125,7 +125,7 @@ const WalletSignup: React.FC<WalletSignupProps> = ({ onBack, onClose }) => {
               disabled={!username || isLoading}
               isLoading={isLoading}
             >
-              Create Account
+              {isLoading ? "Creating Account..." : "Create Account"}
             </AuthButton>
           </div>
         )}

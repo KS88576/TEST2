@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "api/auth/signup/email/*.ts": {
+        "maxDuration": 30
+      }
+    }
+  }

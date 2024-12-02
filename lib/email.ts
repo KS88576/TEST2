@@ -1,25 +1,18 @@
-// lib/email.ts
-import nodemailer from 'nodemailer';
+import nodemailer, { SentMessageInfo } from 'nodemailer';
 
 // Create transporter using Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD, // Use app-specific password
+    pass: process.env.EMAIL_PASSWORD,
   },
+  pool: true,
+  maxConnections: 1,
+  maxMessages: 100,
+  rateDelta: 1000,
+  rateLimit: 5
 });
-
-// Or use Outlook
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.office365.com",
-//   port: 587,
-//   secure: false,
-//   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASSWORD,
-//   },
-// });
 
 export async function sendVerificationEmail(
   to: string,
@@ -28,56 +21,73 @@ export async function sendVerificationEmail(
 ) {
   const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${verificationToken}&email=${to}`;
 
-  try {
-    await transporter.sendMail({
-      from: `"Stable.fun" <${process.env.EMAIL_USER}>`,
-      to,
-      subject: "Verify your email address",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">Welcome to Stable.fun!</h2>
-          <p>Hi ${username},</p>
-          <p>Please verify your email address by clicking the button below:</p>
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="${verificationUrl}" 
-               style="background-color: #00BCD4; 
-                      color: white; 
-                      padding: 12px 30px; 
-                      text-decoration: none; 
-                      border-radius: 5px; 
-                      display: inline-block;">
-              Verify Email Address
-            </a>
-          </div>
-          <p>Or copy and paste this link in your browser:</p>
-          <p style="color: #666;">${verificationUrl}</p>
-          <p>This link will expire in 24 hours.</p>
-          <hr style="border: 1px solid #eee; margin: 20px 0;">
-          <p style="color: #666; font-size: 12px;">
-            If you didn't create an account with Stable.fun, please ignore this email.
-          </p>
+  const mailOptions = {
+    from: `"Stable.fun" <${process.env.EMAIL_USER}>`,
+    to,
+    subject: "Verify your email address",
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #333;">Welcome to Stable.fun!</h2>
+        <p>Hi ${username},</p>
+        <p>Please verify your email address by clicking the button below:</p>
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${verificationUrl}" 
+             style="background-color: #00BCD4; 
+                    color: white; 
+                    padding: 12px 30px; 
+                    text-decoration: none; 
+                    border-radius: 5px; 
+                    display: inline-block;">
+            Verify Email Address
+          </a>
         </div>
-      `,
-    });
+        <p>Or copy and paste this link in your browser:</p>
+        <p style="color: #666;">${verificationUrl}</p>
+        <p>This link will expire in 24 hours.</p>
+        <hr style="border: 1px solid #eee; margin: 20px 0;">
+        <p style="color: #666; font-size: 12px;">
+          If you didn't create an account with Stable.fun, please ignore this email.
+        </p>
+      </div>
+    `
+  };
 
-    console.log("Verification email sent successfully");
+  try {
+    const emailPromise = transporter.sendMail(mailOptions);
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Email timeout')), 25000)
+    );
+
+    const info = await Promise.race([emailPromise, timeoutPromise]) as SentMessageInfo;
+    console.log("Email send details:", {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response
+    });
     return true;
+
   } catch (err: unknown) {
     console.error("Error sending verification email:", err);
     
+    if (err instanceof Error) {
+      if (err.message === 'Email timeout') {
+        throw new Error("Email sending timed out, please try again");
+      }
+    }
+    
     if (err && typeof err === 'object' && 'code' in err) {
-        if (err.code === 'EAUTH') {
-            throw new Error("Email authentication failed. Please check credentials.");
-        } else if (err.code === 'ETIMEDOUT') {
-            throw new Error("Email sending timed out. Please try again.");
-        }
+      if (err.code === 'EAUTH') {
+        throw new Error("Email authentication failed. Please check credentials.");
+      } else if (err.code === 'ETIMEDOUT') {
+        throw new Error("Email sending timed out. Please try again.");
+      }
     }
     
     throw new Error("Failed to send verification email");
   }
 }
 
-// Optional: A function to verify the email configuration
 export async function verifyEmailConfig() {
   try {
     await transporter.verify();
