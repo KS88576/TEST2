@@ -1,7 +1,10 @@
 {
     "functions": {
-      "api/auth/signup/email/*.ts": {
+      "src/app/api/auth/signup/email/route.ts": {
         "maxDuration": 30
-      }
+      },
+      "src/app/api/auth/signup/wallet/route.ts": {
+        "maxDuration": 30
+      },
     }
   }
