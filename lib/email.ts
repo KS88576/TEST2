@@ -1,5 +1,13 @@
 import nodemailer, { SentMessageInfo } from 'nodemailer';
 
+console.log('Email config check:', {
+  userSet: !!process.env.EMAIL_USER,
+  passwordSet: !!process.env.EMAIL_PASSWORD,
+  userLength: process.env.EMAIL_USER?.length,
+  passwordLength: process.env.EMAIL_PASSWORD?.length
+});
+console.log('Password without spaces:', process.env.EMAIL_PASSWORD, 'Length:', process.env.EMAIL_PASSWORD?.length);
+
 // Create transporter using Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',

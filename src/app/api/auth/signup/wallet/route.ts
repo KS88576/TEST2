@@ -77,6 +77,11 @@ export async function POST(request: NextRequest) {
 
         // Verify the wallet signature
         try {
+            console.log('Attempting signature verification:', {
+                walletAddressLength: walletAddress.length,
+                signatureLength: signature.length
+            });
+
             const isValid = await verifyWalletSignature(
                 walletAddress,
                 signature,
@@ -89,13 +94,17 @@ export async function POST(request: NextRequest) {
                     { status: 400 }
                 );
             }
-        } catch (error) {
+        } catch (err) {
+            const error = err as Error;
+            console.error('Detailed verification error:', error);
             return NextResponse.json(
-                { error: 'Signature verification failed' },
+                { 
+                    error: 'Signature verification failed',
+                    details: error.message 
+                },
                 { status: 400 }
             );
         }
-
         // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db("ark");
